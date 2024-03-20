@@ -1,3 +1,42 @@
-<h1 class="text-3xl font-bold underline">
-  Home Component!
-</h1>
+<!--Displays a login form if the users not logged in-->
+<div class="login-form" *ngIf="!userService.isUserLoggedIn">
+
+  <h1 class="text-3xl text-center text-gray-900 font-bold mt-8">PC Build Generator</h1>
+
+  <form [formGroup]="loginForm" class="max-w-md mx-auto mt-8 shadow-lg p-8 bg-white rounded-lg" (ngSubmit)="onLoginSubmit()">
+
+    <div class="mb-4">
+      <label for="login-username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+      <input type="text" id="login-username" formControlName="username" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your username">
+      <div *ngIf="isInvalidLogin('username')" class="text-red-500 text-xs mt-1">Invalid username</div>
+    </div>
+
+    <div class="mb-4">
+      <label for="login-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+      <input type="password" id="login-password" formControlName="password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your password">
+      <div *ngIf="isInvalidLogin('password')" class="text-red-500 text-xs mt-1">Invalid password</div>
+    </div>
+
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+
+    <hr class="my-4">
+
+    <p class="text-center">Or you can create an account using the link below</p>
+    <button routerLink="/create-account" class="block mx-auto mt-4 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Account</button>
+
+  </form>
+
+</div>
+
+<!--Displays a background image, welcome message and current user email when logged in-->
+<div *ngIf="userService.isUserLoggedIn" class="centered-container">
+
+<!--  <div class="background-image">-->
+<!--    <img [src]="'assets/HomepageBackground.png'" alt="Homepage Background" height="1308" width="2324">-->
+<!--  </div>-->
+
+  <h1>PC Build Generator</h1>
+  <h3>Welcome Back!!!</h3>
+  <p>You are currently logged in as {{ userService.currentUserUsername }}</p>
+
+</div>

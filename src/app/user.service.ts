@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   currentUserId: string;
-  currentUserEmail: string;
+  currentUserUsername: string;
   currentUserToken: string;
   isUserLoggedIn: boolean;
 
@@ -16,7 +16,7 @@ export class UserService {
   */
   constructor() {
     this.currentUserId = '';
-    this.currentUserEmail = '';
+    this.currentUserUsername = '';
     this.currentUserToken = '';
     this.isUserLoggedIn = false;
   }
@@ -30,12 +30,12 @@ export class UserService {
     return this.currentUserId;
   }
 
-  setCurrentUserEmail(email: string): void {
-    this.currentUserEmail = email;
+  setCurrentUserUsername(email: string): void {
+    this.currentUserUsername = email;
   }
 
   getCurrentUserEmail(): string {
-    return this.currentUserEmail;
+    return this.currentUserUsername;
   }
 
   setCurrentUserToken(token: string): void {
