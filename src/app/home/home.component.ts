@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {WebService} from "../web.service";
 import {UserService} from "../user.service";
+import {StorageService} from "../storage.service";
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,8 @@ import {UserService} from "../user.service";
 })
 export class HomeComponent {
 
-  constructor(private formBuilder: FormBuilder, public webService: WebService, public userService: UserService) {}
+  constructor(private formBuilder: FormBuilder, public webService: WebService,
+              public userService: UserService, public storageService: StorageService) {}
 
   loginForm: any;
 
@@ -20,6 +22,7 @@ export class HomeComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.storageService.saveToLocalStorage("MyVariable", "StoredData");
   }
 
   // Handle Login Form Submission
