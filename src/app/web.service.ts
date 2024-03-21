@@ -24,4 +24,10 @@ export class WebService {
     return this.http.get('http://127.0.0.1:8000/api/v1.0/login', { headers });
   }
 
+  // Calls the logout endpoint using the current users token
+  callLogout(token: string) {
+    const headers = new HttpHeaders().set('x-access-token', token);
+    return this.http.get('http://127.0.0.1:8000/api/v1.0/logout', { headers });
+  }
+
 }

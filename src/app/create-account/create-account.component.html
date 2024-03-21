@@ -1,1 +1,38 @@
-<p>create-account works!</p>
+<form [formGroup]="createAccountForm" (ngSubmit)="onCreateAccountSubmit()">
+
+  <div class="form-group">
+    <label for="create-firstname">First Name</label>
+    <input type="text" id="create-firstname" formControlName="firstname" class="form-control" placeholder="Enter your first name">
+    <!-- Show error message in red if the first name is invalid and has been touched -->
+    <div *ngIf="isInvalidSignup('firstname')" class="error-message red-text">Invalid first name</div>
+  </div>
+
+  <div class="form-group">
+    <label for="create-lastname">Last Name</label>
+    <input type="text" id="create-lastname" formControlName="lastname" class="form-control" placeholder="Enter your last name">
+    <!-- Show error message in red if the last name is invalid and has been touched -->
+    <div *ngIf="isInvalidSignup('lastname')" class="error-message red-text">Invalid last name</div>
+  </div>
+
+  <div class="form-group">
+    <label for="create-username">Username</label>
+    <input type="text" id="create-username" formControlName="username" class="form-control" placeholder="Enter your username">
+    <!-- Show error message in red if the username is invalid and has been touched -->
+    <div *ngIf="isInvalidSignup('username')" class="error-message red-text">Invalid username</div>
+  </div>
+
+  <div class="form-group">
+    <label for="create-password">Password</label>
+    <input type="password" id="create-password" formControlName="password" class="form-control" placeholder="Enter your password">
+    <!-- Show error message in red if the password is invalid and has been touched -->
+    <div *ngIf="isInvalidSignup('password')" class="error-message red-text">Invalid password</div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Create Account</button>
+
+  <!-- Also has a button to redirect to the login page -->
+  <hr>
+  <p>Or you can log in using the link below</p>
+  <button routerLink="/">Log In</button>
+
+</form>

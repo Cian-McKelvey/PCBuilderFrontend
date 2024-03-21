@@ -58,4 +58,34 @@ export class HomeComponent {
     return this.loginForm.controls[control].invalid && this.loginForm.controls[control].touched;
   }
 
+
+  logout() {
+    const currentToken = this.userService.getCurrentUserToken();
+
+    if (currentToken) {
+      this.webService.callLogout(currentToken).subscribe(
+        (response) => {
+          // Handle successful logout
+          console.log('Logout successful:', response);
+          window.alert('Logout Successful!');
+
+          this.userService.setIsUserLoggedIn(false);
+          this.userService.setCurrentUserId("");
+          this.userService.setCurrentUserUsername("");
+          this.userService.setCurrentUserToken("");
+
+          location.reload(); // Reloading everything refreshes all the pages and clears all the current user variables
+        },
+        (error) => {
+          // Handle logout error
+          console.error('Logout error:', error);
+          window.alert('Logout Failed');
+        }
+      );
+    }
+    else {
+      console.error("LOGOUT ERROR, no valid token present");
+    }
+  }
+
 }
