@@ -1,10 +1,9 @@
-<!--Displays a login form if the users not logged in-->
-<div class="login-form" *ngIf="!userService.getIsUserLoggedIn()">
+<!-- Displays a login form if the user is not logged in -->
+<div class="login-form bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center" *ngIf="!userService.getIsUserLoggedIn()">
 
-  <h1 class="text-3xl text-center text-gray-900 font-bold mt-8">PC Build Generator</h1>
+  <h1 class="text-3xl font-bold mb-8">PC Build Generator</h1>
 
-  <form [formGroup]="loginForm" class="max-w-md mx-auto mt-8 shadow-lg p-8 bg-white rounded-lg" (ngSubmit)="onLoginSubmit()">
-
+  <form [formGroup]="loginForm" class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg" (ngSubmit)="onLoginSubmit()">
     <div class="mb-4">
       <label for="login-username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
       <input type="text" id="login-username" formControlName="username" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your username">
@@ -17,29 +16,30 @@
       <div *ngIf="isInvalidLogin('password')" class="text-red-500 text-xs mt-1">Invalid password</div>
     </div>
 
-    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
+    <button type="submit" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Login</button>
 
     <hr class="my-4">
 
-    <p class="text-center">Or you can create an account using the link below</p>
-    <button routerLink="/create-account" class="block mx-auto mt-4 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Account</button>
-
+    <p class="text-center text-black">Or you can create an account using the link below</p>
+    <a routerLink="/create-account" class="block mx-auto mt-4 bg-yellow-300 hover:bg-yellow-400 text-gray-900 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Account</a>
   </form>
-
 </div>
 
-<!--Displays a background image, welcome message and current users username when logged in-->
+
+
+<!--Displays a background image, welcome message, and current user's username when logged in-->
 <div *ngIf="userService.getIsUserLoggedIn()" class="centered-container">
 
-<!--  <div class="background-image">-->
-<!--    <img [src]="'assets/HomepageBackground.png'" alt="Homepage Background" height="1308" width="2324">-->
-<!--  </div>-->
+  <!--  <div class="background-image">-->
+  <!--    <img [src]="'assets/HomepageBackground.png'" alt="Homepage Background" height="1308" width="2324">-->
+  <!--  </div>-->
 
   <h1>PC Build Generator</h1>
   <h3>Welcome Back!!!</h3>
   <p>You are currently logged in as {{ userService.getCurrentUserUsername() }}</p>
 
-  <button (click)="logout()">Logout</button>
+  <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
 
+  <app-footer></app-footer>
 
 </div>

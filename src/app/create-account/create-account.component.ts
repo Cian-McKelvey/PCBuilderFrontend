@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {WebService} from "../web.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-account',
@@ -11,7 +12,7 @@ export class CreateAccountComponent {
 
   createAccountForm: any;
 
-  constructor(private formBuilder: FormBuilder, private webService: WebService) { }
+  constructor(private formBuilder: FormBuilder, private webService: WebService, private router: Router) { }
 
   ngOnInit(): void {
     this.createAccountForm = this.formBuilder.group({
@@ -39,6 +40,10 @@ export class CreateAccountComponent {
         (response: any) => {
           console.log('Full response:', response);
           window.alert('Account creation successful');
+
+          // Return to root page here
+          this.router.navigate(['/']);
+
         },
         (error: any) => {
           console.error('Error creating account', error);

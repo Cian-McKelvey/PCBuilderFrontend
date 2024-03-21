@@ -85,6 +85,7 @@ export class HomeComponent {
     }
     else {
       console.error("LOGOUT ERROR, no valid token present");
+      window.alert("LOGOUT ERROR, no valid token present");
     }
   }
 
