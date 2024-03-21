@@ -9,6 +9,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { AccountComponent } from './account/account.component';
+import { CreateNewBuildComponent } from './create-new-build/create-new-build.component';
+import { FetchAllBuildsComponent } from './fetch-all-builds/fetch-all-builds.component';
 
 const routes: any = [
   {
@@ -18,6 +21,18 @@ const routes: any = [
   {
     path: 'create-account',
     component: CreateAccountComponent
+  },
+  {
+    path: 'account',
+    component: AccountComponent
+  },
+  {
+    path: 'all-builds',
+    component: FetchAllBuildsComponent
+  },
+  {
+    path: 'new-build',
+    component: CreateNewBuildComponent
   }
 ]
 
@@ -27,7 +42,10 @@ const routes: any = [
     HomeComponent,
     CreateAccountComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    AccountComponent,
+    CreateNewBuildComponent,
+    FetchAllBuildsComponent
   ],
   imports: [
     BrowserModule,
