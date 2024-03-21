@@ -1,5 +1,5 @@
 <!--Displays a login form if the users not logged in-->
-<div class="login-form" *ngIf="!userService.isUserLoggedIn">
+<div class="login-form" *ngIf="!userService.getIsUserLoggedIn()">
 
   <h1 class="text-3xl text-center text-gray-900 font-bold mt-8">PC Build Generator</h1>
 
@@ -28,8 +28,8 @@
 
 </div>
 
-<!--Displays a background image, welcome message and current user email when logged in-->
-<div *ngIf="userService.isUserLoggedIn" class="centered-container">
+<!--Displays a background image, welcome message and current users username when logged in-->
+<div *ngIf="userService.getIsUserLoggedIn()" class="centered-container">
 
 <!--  <div class="background-image">-->
 <!--    <img [src]="'assets/HomepageBackground.png'" alt="Homepage Background" height="1308" width="2324">-->
@@ -37,6 +37,6 @@
 
   <h1>PC Build Generator</h1>
   <h3>Welcome Back!!!</h3>
-  <p>You are currently logged in as {{ userService.currentUserUsername }}</p>
+  <p>You are currently logged in as {{ userService.getCurrentUserUsername() }}</p>
 
 </div>

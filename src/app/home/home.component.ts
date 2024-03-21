@@ -37,7 +37,7 @@ export class HomeComponent {
           const token = data.token;
           const userId = data.user_id;
 
-          // Set current user email, password, token and user_id in the user service as well as login status
+          // Set current user username, password, token and user_id in the user service as well as login status
           this.userService.setCurrentUserUsername(this.loginForm.value.username);
           this.userService.setCurrentUserToken(token);
           this.userService.setCurrentUserId(userId);
@@ -47,7 +47,7 @@ export class HomeComponent {
         },
         (error) => {
           console.error('Error during login', error);
-          window.alert("Login Failed, check email or password");
+          window.alert("Login Failed, check username or password");
         }
       );
     }
