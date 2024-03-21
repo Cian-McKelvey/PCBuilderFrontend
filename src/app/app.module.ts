@@ -7,6 +7,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 const routes: any = [
   {
@@ -23,7 +25,9 @@ const routes: any = [
   declarations: [
     AppComponent,
     HomeComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

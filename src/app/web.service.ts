@@ -16,7 +16,7 @@ export class WebService {
 
   // Login
   callLoginEndpoint(loginData: any) {
-    // Set headers with Authorization
+    // Sets headers as basic auth is used to log in with backend
     const headers = new HttpHeaders({
       'Authorization': 'Basic ' + btoa(`${loginData.username}:${loginData.password}`)
     });
@@ -28,6 +28,16 @@ export class WebService {
   callLogout(token: string) {
     const headers = new HttpHeaders().set('x-access-token', token);
     return this.http.get('http://127.0.0.1:8000/api/v1.0/logout', { headers });
+  }
+
+  callCreateAccountEndpoint(firstName: string, lastName: string, username: string, password: string) {
+    let createForm = new FormData();
+    createForm.append("first_name", firstName);
+    createForm.append("last_name", lastName);
+    createForm.append("username", username);
+    createForm.append("password", password);
+
+    return this.http.post('http://127.0.0.1:8000/api/v1.0/users/new', createForm)
   }
 
 }

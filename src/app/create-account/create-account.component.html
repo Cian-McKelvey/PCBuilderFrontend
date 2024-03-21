@@ -1,38 +1,41 @@
-<form [formGroup]="createAccountForm" (ngSubmit)="onCreateAccountSubmit()">
+<form [formGroup]="createAccountForm" (ngSubmit)="onCreateAccountSubmit()" class="max-w-md mx-auto mt-8 shadow-lg p-8 bg-white rounded-lg">
 
-  <div class="form-group">
-    <label for="create-firstname">First Name</label>
-    <input type="text" id="create-firstname" formControlName="firstname" class="form-control" placeholder="Enter your first name">
+  <h1 class="text-3xl text-center text-gray-900 font-bold mb-8">PC Build Generator</h1>
+
+  <div class="mb-4">
+    <label for="create-firstname" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+    <input type="text" id="create-firstname" formControlName="firstname" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your first name">
     <!-- Show error message in red if the first name is invalid and has been touched -->
-    <div *ngIf="isInvalidSignup('firstname')" class="error-message red-text">Invalid first name</div>
+    <div *ngIf="isInvalidSignup('firstname')" class="text-red-500 text-xs mt-1">Invalid first name</div>
   </div>
 
-  <div class="form-group">
-    <label for="create-lastname">Last Name</label>
-    <input type="text" id="create-lastname" formControlName="lastname" class="form-control" placeholder="Enter your last name">
+  <div class="mb-4">
+    <label for="create-lastname" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+    <input type="text" id="create-lastname" formControlName="lastname" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your last name">
     <!-- Show error message in red if the last name is invalid and has been touched -->
-    <div *ngIf="isInvalidSignup('lastname')" class="error-message red-text">Invalid last name</div>
+    <div *ngIf="isInvalidSignup('lastname')" class="text-red-500 text-xs mt-1">Invalid last name</div>
   </div>
 
-  <div class="form-group">
-    <label for="create-username">Username</label>
-    <input type="text" id="create-username" formControlName="username" class="form-control" placeholder="Enter your username">
+  <div class="mb-4">
+    <label for="create-username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+    <input type="text" id="create-username" formControlName="username" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your username">
     <!-- Show error message in red if the username is invalid and has been touched -->
-    <div *ngIf="isInvalidSignup('username')" class="error-message red-text">Invalid username</div>
+    <div *ngIf="isInvalidSignup('username')" class="text-red-500 text-xs mt-1">Invalid username</div>
   </div>
 
-  <div class="form-group">
-    <label for="create-password">Password</label>
-    <input type="password" id="create-password" formControlName="password" class="form-control" placeholder="Enter your password">
+  <div class="mb-4">
+    <label for="create-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+    <input type="password" id="create-password" formControlName="password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Enter your password">
     <!-- Show error message in red if the password is invalid and has been touched -->
-    <div *ngIf="isInvalidSignup('password')" class="error-message red-text">Invalid password</div>
+    <div *ngIf="isInvalidSignup('password')" class="text-red-500 text-xs mt-1">Invalid password</div>
   </div>
 
-  <button type="submit" class="btn btn-primary">Create Account</button>
+  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Create Account</button>
 
   <!-- Also has a button to redirect to the login page -->
-  <hr>
-  <p>Or you can log in using the link below</p>
-  <button routerLink="/">Log In</button>
+  <hr class="my-4">
+  <p class="text-center">Or you can log in using the link below</p>
+  <button routerLink="/" class="block mx-auto mt-4 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Log In</button>
 
 </form>
+
