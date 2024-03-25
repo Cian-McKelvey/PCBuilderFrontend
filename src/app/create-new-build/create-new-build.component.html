@@ -8,6 +8,9 @@
       <span *ngIf="isIncomplete()">Please enter a valid price</span>
       <button *ngIf="!isIncomplete()" type="submit" class="btn btn-primary">Submit</button>
     </form>
+
+    <app-footer></app-footer>
+
   </div>
 
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
@@ -66,15 +69,20 @@
       <h3 class="text-lg font-bold">Created On</h3>
       <p>{{ buildInfo.created_at }}</p>
     </div>
+
+    <!-- Button to refresh the page which will reset the html -->
+    <button onclick="window.location.reload();" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Create Another Build
+    </button>
+
   </div>
-
-
-  <app-footer></app-footer>
 
 </div>
 
 <div *ngIf="!userService.getIsUserLoggedIn()">
 
   <h1>Same but not logged in</h1>
+
+  <app-footer></app-footer>
 
 </div>
