@@ -11,37 +11,45 @@
   </div>
 
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
-    <h2 class="text-2xl font-bold col-span-2 mb-4">Build Information</h2>
+
+    <h2 class="text-2xl font-bold col-span-2 mb-4">Your new build!</h2>
+
     <div>
       <h3 class="text-lg font-bold">CPU</h3>
       <p>{{ buildInfo.CPU.value }}</p>
       <p>{{ buildInfo.CPU.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">Case</h3>
       <p>{{ buildInfo.Case.value }}</p>
       <p>{{ buildInfo.Case.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">GPU</h3>
       <p>{{ buildInfo.GPU.value }}</p>
       <p>{{ buildInfo.GPU.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">Motherboard</h3>
       <p>{{ buildInfo.Motherboard.value }}</p>
       <p>{{ buildInfo.Motherboard.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">Power Supply</h3>
       <p>{{ buildInfo.PowerSupply.value }}</p>
       <p>{{ buildInfo.PowerSupply.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">RAM</h3>
       <p>{{ buildInfo.RAM.value }}</p>
       <p>{{ buildInfo.RAM.price }}</p>
     </div>
+
     <div>
       <h3 class="text-lg font-bold">Storage</h3>
       <p>{{ buildInfo.Storage.value }}</p>
