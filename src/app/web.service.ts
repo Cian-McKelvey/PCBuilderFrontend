@@ -40,4 +40,16 @@ export class WebService {
     return this.http.post('http://127.0.0.1:8000/api/v1.0/users/new', createForm)
   }
 
+  callDeleteAccountEndpoint() {}
+
+  callCreateNewBuildEndpoint(build_price: string, token: string, userID: string) {
+    const headers: HttpHeaders = new HttpHeaders()
+      .set('x-access-token', token)
+      .set('x-user-id', userID);
+    const data = {'price': build_price};
+
+    return this.http.post('http://127.0.0.1:8000/api/v1.0/builds/new', data, { headers });
+  }
+
+
 }

@@ -22,7 +22,6 @@ export class HomeComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.storageService.saveToLocalStorage("MyVariable", "StoredData");
   }
 
   // Handle Login Form Submission

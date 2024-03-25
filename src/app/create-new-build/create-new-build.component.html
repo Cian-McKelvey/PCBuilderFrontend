@@ -1,1 +1,26 @@
-<p>create-new-build works!</p>
+<!--Displays a background image, welcome message, and current user's username when logged in-->
+<div *ngIf="userService.getIsUserLoggedIn()">
+
+<!-- Put up a form to request a new build -->
+
+<!-- Once the request is sent, remove the form and show a loading symbol -->
+
+<!-- Replace the html with the build information when it comes -->
+
+  <form [formGroup]="priceForm" (ngSubmit)="submitPrice()">
+    <label for="priceInput">Enter Price:</label>
+    <input type="number" id="priceInput" formControlName="price" />
+    <button type="submit">Log Price</button>
+  </form>
+
+
+
+  <app-footer></app-footer>
+
+</div>
+
+<div *ngIf="!userService.getIsUserLoggedIn()">
+
+  <h1>Same but not logged in</h1>
+
+</div>

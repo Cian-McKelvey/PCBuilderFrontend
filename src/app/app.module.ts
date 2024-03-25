@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from "@angular/router";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
@@ -47,13 +47,14 @@ const routes: any = [
     CreateNewBuildComponent,
     FetchAllBuildsComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule, // Allows Http requests
-    RouterModule.forRoot(routes),
-    ReactiveFormsModule,
-    // Allows routing
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule, // Allows Http requests
+        RouterModule.forRoot(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        // Allows routing
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
