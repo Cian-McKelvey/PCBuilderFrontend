@@ -54,3 +54,19 @@ footer {
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* Styling for the links: Keeps them side by side on the same line */
+.social-links {
+  display: flex;
+  align-items: center;
+}
+
+.social-links a {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.social-links img {
+  max-width: 100%;
+  height: auto;
+}
