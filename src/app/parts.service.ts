@@ -71,7 +71,8 @@ export class PartsService {
     this.caseList = value;
   }
 
-  // Make sure this is correct
+  // Make sure this is correct, primarily the strings being checked to add parts to the correct list
+  // Also the complete parts list can probably be stored in local storage in the browser. Will increase computation time
   setAllSeparatePartLists(completePartList: any[]): void {
     const cpuList: any[] = [];
     const gpuList: any[] = [];
