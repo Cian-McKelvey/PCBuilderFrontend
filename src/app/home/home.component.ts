@@ -43,6 +43,27 @@ export class HomeComponent {
           this.userService.setIsUserLoggedIn(true);
 
           window.alert("Login Successful");
+
+          // Once logged in, set the parts list to local storage
+          let currentToken = this.userService.getCurrentUserToken();
+          if (currentToken != null) {
+            this.webService.callFetchAllPartsEndpoint(currentToken)
+              .toPromise()
+              .then((response: any) => {
+                const completePartsArray = response.parts;
+
+                // After saving all this data to local storage the complete data stored is around 70kb.
+                // This is considered acceptable
+                this.storageService.saveToLocalStorage('PartsArray', completePartsArray);
+                console.log('Parts loaded to local storage!');
+              })
+              .catch((error) => {
+                console.log('Error fetching parts:', error);
+              });
+          } else {
+            console.log("Complete parts list could not be fetched.");
+          }
+
         },
         (error) => {
           console.error('Error during login', error);

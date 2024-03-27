@@ -73,6 +73,8 @@ export class PartsService {
 
   // Make sure this is correct, primarily the strings being checked to add parts to the correct list
   // Also the complete parts list can probably be stored in local storage in the browser. Will increase computation time
+  // Finally make sure that either on method call, or change the method to make sure it works with the fact
+  // that its held in a nested 'parts' json object
   setAllSeparatePartLists(completePartList: any[]): void {
     const cpuList: any[] = [];
     const gpuList: any[] = [];

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {UserService} from "../user.service";
 import {WebService} from "../web.service";
 import {FormBuilder, Validators} from "@angular/forms";
+import {StorageService} from "../storage.service";
+import {PartsService} from "../parts.service";
 
 @Component({
   selector: 'app-create-new-build',
@@ -19,9 +21,22 @@ export class CreateNewBuildComponent {
       // Verifies the price is inputted and is a valid whole number
       price: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]]
     });
+
+    // Divides the parts into their separate part arrays using the partsService
+    let partsArray = this.storageService.getFromLocalStorage('PartsArray');
+    this.partsService.setAllSeparatePartLists(partsArray);
+
+    // Test to verify the data is being split into arrays correctly.
+    // let cpusTest = this.partsService.getCpuList();
+    // for (const cpu of cpusTest) {
+    //   console.log(cpu);
+    // }
+
   }
 
-  constructor(public userService: UserService, public webService: WebService, private formBuilder: FormBuilder) {}
+  constructor(public userService: UserService, public webService: WebService,
+              private formBuilder: FormBuilder, public storageService: StorageService,
+              private partsService: PartsService) {}
 
   isInvalid(control: string): boolean {
     return (
