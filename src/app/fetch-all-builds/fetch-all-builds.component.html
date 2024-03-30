@@ -1,14 +1,13 @@
 <!-- If the user is logged in correctly, checked using the user service -->
 <div *ngIf="userService.getIsUserLoggedIn()">
+
+  <app-navbar></app-navbar>
+
   <div>
-
-    <button routerLink="/">Go Home</button>
-
-    <hr>
 
     <!-- Show the build section only if buildsByAccount is not empty -->
     <div *ngIf="areBuildsFetched">
-      <div *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
+      <div class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
 
         <!-- Below is used to display each build, can create classes then add styling etc... -->
         <div>
@@ -68,6 +67,7 @@
 
       <!-- Pagination controls reference "pageNum" from the TypeScript file -->
       <pagination-controls (pageChange)="pageNum = $event"></pagination-controls>
+
     </div>
 
     <!-- Show a loading message while builds are being fetched -->

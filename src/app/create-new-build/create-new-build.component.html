@@ -1,5 +1,7 @@
 <div *ngIf="userService.getIsUserLoggedIn()">
 
+  <app-navbar></app-navbar>
+
   <div *ngIf="!isBuildCreated">
     <form [formGroup]="priceForm" (ngSubmit)="submitPrice()">
       <label for="priceInput">Enter Price:</label>
