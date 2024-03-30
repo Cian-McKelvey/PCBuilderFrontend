@@ -3,15 +3,15 @@
     <div class="flex items-center justify-between h-16">
       <div class="flex">
         <div class="flex-shrink-0">
-          <a routerLink="/" class="text-white">Home</a>
+          <a routerLink="/" class="text-white" [class.active]="isActiveRoute('/')">Home</a>
         </div>
         <div class="hidden md:block">
           <ul class="ml-10 flex items-baseline space-x-4">
             <li>
-              <a routerLink="/new-build" class="text-white hover:text-gray-300">Create a New Build</a>
+              <a routerLink="/new-build" class="text-white hover:text-gray-300" [class.active]="isActiveRoute('/new-build')">Create a New Build</a>
             </li>
             <li>
-              <a routerLink="/all-builds" class="text-white hover:text-gray-300">View all Builds</a>
+              <a routerLink="/all-builds" class="text-white hover:text-gray-300" [class.active]="isActiveRoute('/all-builds')">View all Builds</a>
             </li>
           </ul>
         </div>
@@ -19,10 +19,11 @@
       <div class="hidden md:block">
         <div class="ml-4 flex items-center md:ml-6">
           <div class="form-inline">
-            <a routerLink="/account" class="text-yellow-500 hover:text-yellow-300">Account</a>
+            <a routerLink="/account" class="text-yellow-500 hover:text-yellow-300" [class.active]="isActiveRoute('/account')">Account</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </nav>
+

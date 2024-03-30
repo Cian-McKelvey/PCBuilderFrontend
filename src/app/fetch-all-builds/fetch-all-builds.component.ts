@@ -29,11 +29,12 @@ export class FetchAllBuildsComponent {
     if (currentToken && currentID) {
       this.buildsSubscription = this.webService.callFetchAllBuildsEndpoint(currentToken, currentID)
         .subscribe((builds) => {
-          // Adds the builds to the list
+          // Adds the builds to the list, sloppy code but there doesn't appear to be a way that works
+          // that is easily read, something like this.buildsByAccount = builds?.builds?.reverse() ?? []; is another
+          // option but it makes the code hard to read
           this.buildsByAccount = builds;
           this.buildsByAccount = this.buildsByAccount.builds;
-
-          console.log(this.buildsByAccount);
+          this.buildsByAccount = this.buildsByAccount.reverse();
 
           this.areBuildsFetched = true;
 
