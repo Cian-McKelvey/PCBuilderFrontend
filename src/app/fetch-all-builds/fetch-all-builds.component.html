@@ -1,1 +1,78 @@
-<p>fetch-all-builds works!</p>
+<!-- If the user is logged in correctly, checked using the user service -->
+<div *ngIf="userService.getIsUserLoggedIn()">
+  <div>
+
+    <button routerLink="/">Go Home</button>
+
+    <hr>
+
+    <!-- Show the build section only if buildsByAccount is not empty -->
+    <div *ngIf="areBuildsFetched">
+      <div *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
+
+        <!-- Below is used to display each build, can create classes then add styling etc... -->
+        <div>
+          <h3 class="text-lg font-bold">CPU</h3>
+          <p>{{ buildInfo.CPU.value }}</p>
+          <p>£{{ buildInfo.CPU.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">Case</h3>
+          <p>{{ buildInfo.Case.value }}</p>
+          <p>£{{ buildInfo.Case.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">GPU</h3>
+          <p>{{ buildInfo.GPU.value }}</p>
+          <p>£{{ buildInfo.GPU.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">Motherboard</h3>
+          <p>{{ buildInfo.Motherboard.value }}</p>
+          <p>£{{ buildInfo.Motherboard.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">Power Supply</h3>
+          <p>{{ buildInfo.PowerSupply.value }}</p>
+          <p>£{{ buildInfo.PowerSupply.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">RAM</h3>
+          <p>{{ buildInfo.RAM.value }}</p>
+          <p>£{{ buildInfo.RAM.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">Storage</h3>
+          <p>{{ buildInfo.Storage.value }}</p>
+          <p>£{{ buildInfo.Storage.price }}</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold">Overall Price</h3>
+          <!-- The number pipe trims to two decimal places -->
+          <p>£{{ buildInfo.OverallPrice | number: '1.2-2' }}</p>
+        </div>
+
+        <div class="col-span-2">
+          <h3 class="text-lg font-bold">Created On</h3>
+          <p>{{ buildInfo.created_at }}</p>
+        </div>
+
+      </div>
+
+      <!-- Pagination controls reference "pageNum" from the TypeScript file -->
+      <pagination-controls (pageChange)="pageNum = $event"></pagination-controls>
+    </div>
+
+    <!-- Show a loading message while builds are being fetched -->
+    <div *ngIf="!areBuildsFetched">
+      <p>Loading builds...</p>
+    </div>
+  </div>
+</div>

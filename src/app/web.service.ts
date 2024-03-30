@@ -58,4 +58,12 @@ export class WebService {
     return this.http.post('http://127.0.0.1:8000/api/v1.0/builds/new', data, { headers });
   }
 
+  callFetchAllBuildsEndpoint(token: string, userID: string) {
+    const headers: HttpHeaders = new HttpHeaders()
+      .set('x-access-token', token)
+      .set('x-user-id', userID);
+
+    return this.http.get('http://127.0.0.1:8000/api/v1.0/builds/fetch_all', { headers });
+  }
+
 }

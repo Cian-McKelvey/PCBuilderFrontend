@@ -12,6 +12,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AccountComponent } from './account/account.component';
 import { CreateNewBuildComponent } from './create-new-build/create-new-build.component';
 import { FetchAllBuildsComponent } from './fetch-all-builds/fetch-all-builds.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 const routes: any = [
   {
@@ -47,14 +48,14 @@ const routes: any = [
     CreateNewBuildComponent,
     FetchAllBuildsComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule, // Allows Http requests
-        RouterModule.forRoot(routes),
-        ReactiveFormsModule,
-        FormsModule,
-        // Allows routing
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule, // Allows Http requests
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    NgxPaginationModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
