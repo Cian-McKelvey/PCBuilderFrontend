@@ -1,4 +1,4 @@
 .active {
   /* the important flag overwrites any tailwind that may be affecting it */
-  color: blueviolet !important;
+  color: #ffc107 !important;
 }

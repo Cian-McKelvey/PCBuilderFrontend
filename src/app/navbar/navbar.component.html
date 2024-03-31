@@ -16,13 +16,25 @@
           </ul>
         </div>
       </div>
+
+<!--      <div class="hidden md:block">-->
+<!--        <div class="ml-4 flex items-center md:ml-6">-->
+<!--          <div class="form-inline">-->
+<!--            <a routerLink="/account" class="text-yellow-500 hover:text-yellow-300" [class.active]="isActiveRoute('/account')">Account</a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
       <div class="hidden md:block">
         <div class="ml-4 flex items-center md:ml-6">
           <div class="form-inline">
-            <a routerLink="/account" class="text-yellow-500 hover:text-yellow-300" [class.active]="isActiveRoute('/account')">Account</a>
+            <a routerLink="/account" [class.active]="isActiveRoute('/account')">
+              <img [src]="'assets/user_symbol.svg'" alt="User Symbol" class="h-10 w-10" />
+            </a>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </nav>
