@@ -6,7 +6,27 @@
 
   <app-navbar></app-navbar>
 
-  <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
+  <div class="login-form bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
+
+    <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
+    <button (click)="toggleDeleteAccountForm()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete Account</button>
+
+    <!--  Form here to delete account  -->
+    <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm"
+          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
+          (ngSubmit)="deleteAccountSubmit()">
+
+      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Please enter "delete my account" to continue</label>
+
+      <input type="text" id="message" formControlName="message"
+             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+             [ngClass]="{ 'error': deleteIsInvalid('message') }">
+
+      <button *ngIf="!deleteIsIncomplete()" type="submit"
+              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
+    </form>
+
+  </div>
 
   <app-footer></app-footer>
 

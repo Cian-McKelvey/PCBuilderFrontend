@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {UserService} from "../user.service";
 import {WebService} from "../web.service";
 import {Router} from "@angular/router";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-account',
@@ -10,7 +11,17 @@ import {Router} from "@angular/router";
 })
 export class AccountComponent {
 
-  constructor(public userService: UserService, private webService: WebService, private router: Router) {}
+  showDeleteAccountForm = false;
+  deleteAccountForm: any;
+
+  constructor(private formBuilder: FormBuilder, public userService: UserService, private webService: WebService, private router: Router) {}
+
+  ngOnInit() {
+    this.deleteAccountForm = this.formBuilder.group({
+      // This checks if the user has typed the message indicating their wish to delete their account
+      message: ['', [Validators.required, Validators.pattern('delete my account')]]
+    });
+  }
 
   logout() {
     const currentToken = this.userService.getCurrentUserToken();
@@ -41,6 +52,26 @@ export class AccountComponent {
       console.error("LOGOUT ERROR, no valid token present");
       window.alert("LOGOUT ERROR, no valid token present");
     }
+  }
+
+  toggleDeleteAccountForm() {
+    this.showDeleteAccountForm = !this.showDeleteAccountForm;
+  }
+
+  deleteAccountSubmit() {
+    console.log(this.deleteAccountForm);
+  }
+
+  deleteIsInvalid(control: string): boolean {
+    return this.deleteAccountForm.controls[control].invalid && this.deleteAccountForm.controls[control].touched;
+  }
+
+  deleteIsUntouched(): boolean {
+    return this.deleteAccountForm.controls.message.pristine;
+  }
+
+  deleteIsIncomplete(): boolean {
+    return this.deleteIsInvalid('message') || this.deleteIsUntouched();
   }
 
 }
