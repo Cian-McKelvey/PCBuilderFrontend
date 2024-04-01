@@ -29,17 +29,27 @@ export class FetchAllBuildsComponent {
     if (currentToken && currentID) {
       this.buildsSubscription = this.webService.callFetchAllBuildsEndpoint(currentToken, currentID)
         .subscribe((builds) => {
-          // Adds the builds to the list, sloppy code but there doesn't appear to be a way that works
-          // that is easily read, something like this.buildsByAccount = builds?.builds?.reverse() ?? []; is another
-          // option but it makes the code hard to read
-          this.buildsByAccount = builds;
-          this.buildsByAccount = this.buildsByAccount.builds;
-          this.buildsByAccount = this.buildsByAccount.reverse();
 
-          this.areBuildsFetched = true;
+          if (builds) {
+            // Adds the builds to the list, sloppy code but there doesn't appear to be a way that works
+            // that is easily read, something like this.buildsByAccount = builds?.builds?.reverse() ?? []; is another
+            // option but it makes the code hard to read
+            this.buildsByAccount = builds;
+            this.buildsByAccount = this.buildsByAccount.builds;
+            this.buildsByAccount = this.buildsByAccount.reverse();
 
-          // Manually trigger change detection to update the UI
-          this.cdr.detectChanges();
+            this.areBuildsFetched = true;
+
+            // Manually trigger change detection to update the UI
+            this.cdr.detectChanges();
+          }
+          else {
+            this.buildsByAccount = [];
+            this.areBuildsFetched = true;
+
+            // Manually trigger change detection to update the UI
+            this.cdr.detectChanges();
+          }
         });
     }
   }

@@ -6,7 +6,7 @@
   <div>
 
     <!-- Show the build section only if buildsByAccount is not empty -->
-    <div *ngIf="areBuildsFetched">
+    <div *ngIf="areBuildsFetched && buildsByAccount.length > 0">
       <div class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
 
         <!-- Below is used to display each build, can create classes then add styling etc... -->
@@ -68,6 +68,10 @@
       <!-- Pagination controls reference "pageNum" from the TypeScript file -->
       <pagination-controls (pageChange)="pageNum = $event"></pagination-controls>
 
+    </div>
+
+    <div *ngIf="areBuildsFetched && buildsByAccount.length >= 0">
+      <h1>No builds have been created on this account - Create a build to get started!</h1>
     </div>
 
     <!-- Show a loading message while builds are being fetched -->

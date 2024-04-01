@@ -39,7 +39,7 @@ export class AccountComponent {
 
           // reroute home
           this.router.navigate(['/']);
-          window.alert('Logout Successful!');
+          window.alert('You have been logged out');
         },
         (error) => {
           // Handle logout error
@@ -54,12 +54,12 @@ export class AccountComponent {
     }
   }
 
+  /*
+    Methods below here are involved with the form validation, toggling of the form or submitting the form
+    for the delete account functionality.
+  */
   toggleDeleteAccountForm() {
     this.showDeleteAccountForm = !this.showDeleteAccountForm;
-  }
-
-  deleteAccountSubmit() {
-    console.log(this.deleteAccountForm);
   }
 
   deleteIsInvalid(control: string): boolean {
@@ -72,6 +72,29 @@ export class AccountComponent {
 
   deleteIsIncomplete(): boolean {
     return this.deleteIsInvalid('message') || this.deleteIsUntouched();
+  }
+
+  deleteAccountSubmit() {
+    const id = this.userService.getCurrentUserId();
+    const token = this.userService.getCurrentUserToken();
+
+    if (id && token) {
+      this.webService.callDeleteAccountEndpoint(id, token).subscribe(
+        (response) => {
+          // Handle successful logout
+          console.log('Deletion successful:', response);
+          window.alert('Account Deleted.');
+
+          // Calls the logout function afterward to reset the application
+          this.logout();
+        },
+        (error) => {
+          // Handle logout error
+          console.error('Deletion error:', error);
+          window.alert('Deletion Failed');
+        }
+      );
+    }
   }
 
 }

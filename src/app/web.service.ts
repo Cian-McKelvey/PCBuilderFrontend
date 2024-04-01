@@ -42,7 +42,12 @@ export class WebService {
 
   callUpdateUserPasswordEndpoint() {}
 
-  callDeleteAccountEndpoint() {}
+  callDeleteAccountEndpoint(id: string, token: string) {
+    const deleteURL: string = 'http://127.0.0.1:8000/api/v1.0/users/' + id + '/delete';
+    const headers: HttpHeaders = new HttpHeaders().set('x-access-token', token);
+
+    return this.http.delete(deleteURL, { headers });
+  }
 
   callFetchAllPartsEndpoint(token: string) {
     const headers: HttpHeaders = new HttpHeaders().set('x-access-token', token);
