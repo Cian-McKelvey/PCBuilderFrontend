@@ -12,7 +12,8 @@
           class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
           (ngSubmit)="deleteAccountSubmit()">
 
-      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Please enter "delete my account" to continue</label>
+      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">You are attempting to delete {{ userService.getCurrentUserUsername() }} <br>
+        Please enter "<strong>delete my account</strong>" to continue</label>
 
       <input type="text" id="message" formControlName="message"
              class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
