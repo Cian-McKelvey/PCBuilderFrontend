@@ -40,7 +40,15 @@ export class WebService {
     return this.http.post('http://127.0.0.1:8000/api/v1.0/users/new', createForm)
   }
 
-  callUpdateUserPasswordEndpoint() {}
+  callUpdateUserPasswordEndpoint(username: string, oldPassword: string, newPassword: string, token: string) {
+    let updateForm: FormData = new FormData();
+    const headers: HttpHeaders = new HttpHeaders().set('x-access-token', token);
+    updateForm.append("username", username);
+    updateForm.append("old_password", oldPassword);
+    updateForm.append("new_password", newPassword);
+
+    return this.http.put('http://127.0.0.1:8000/api/v1.0/users/edit/password', updateForm, { headers });
+  }
 
   callDeleteAccountEndpoint(id: string, token: string) {
     const deleteURL: string = 'http://127.0.0.1:8000/api/v1.0/users/' + id + '/delete';

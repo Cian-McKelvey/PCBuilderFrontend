@@ -66,11 +66,11 @@
       </div>
 
       <!-- Pagination controls reference "pageNum" from the TypeScript file -->
-      <pagination-controls (pageChange)="pageNum = $event"></pagination-controls>
+      <pagination-controls class="pagination-controls" (pageChange)="pageNum = $event"></pagination-controls>
 
     </div>
 
-    <div *ngIf="areBuildsFetched && buildsByAccount.length >= 0">
+    <div *ngIf="areBuildsFetched && buildsByAccount.length === 0">
       <h1>No builds have been created on this account - Create a build to get started!</h1>
     </div>
 

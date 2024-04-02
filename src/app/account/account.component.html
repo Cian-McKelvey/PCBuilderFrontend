@@ -4,10 +4,13 @@
 
   <div class="login-form bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
 
+
     <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
     <button (click)="toggleDeleteAccountForm()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete Account</button>
+    <button (click)="toggleUpdatePasswordForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Password</button>
 
-    <!--  Form here to delete account  -->
+
+    <!--  Delete account form  -->
     <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm"
           class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
           (ngSubmit)="deleteAccountSubmit()">
@@ -21,6 +24,27 @@
 
       <button *ngIf="!deleteIsIncomplete()" type="submit"
               class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
+    </form>
+
+
+    <!--  Update password form  -->
+    <form *ngIf="showUpdatePasswordForm" [formGroup]="updatePasswordForm"
+          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
+          (ngSubmit)="updatePasswordSubmit()">
+
+      <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+      <input type="text" id="username" formControlName="username"
+             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+             <!--[ngClass]="{ 'error': deleteIsInvalid('message') }" -->
+
+      <label for="oldPassword" class="block text-gray-700 text-sm font-bold mb-2">Old Password</label>
+      <input type="password" id="oldPassword" formControlName="oldPassword"
+             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+      <label for="newPassword" class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
+      <input type="password" id="newPassword" formControlName="newPassword"
+             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
     </form>
 
   </div>

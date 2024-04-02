@@ -11,15 +11,23 @@ import {FormBuilder, Validators} from "@angular/forms";
 })
 export class AccountComponent {
 
-  showDeleteAccountForm = false;
+  showDeleteAccountForm: boolean = false;
+  showUpdatePasswordForm: boolean = false;
   deleteAccountForm: any;
+  updatePasswordForm: any;
 
   constructor(private formBuilder: FormBuilder, public userService: UserService, private webService: WebService, private router: Router) {}
 
   ngOnInit() {
+    // Delete Account Form
     this.deleteAccountForm = this.formBuilder.group({
       // This checks if the user has typed the message indicating their wish to delete their account
       message: ['', [Validators.required, Validators.pattern('delete my account')]]
+    });
+
+    // Update Password Form
+    this.deleteAccountForm = this.formBuilder.group({
+      // Finish this here
     });
   }
 
@@ -58,7 +66,7 @@ export class AccountComponent {
     Methods below here are involved with the form validation, toggling of the form or submitting the form
     for the delete account functionality.
   */
-  toggleDeleteAccountForm() {
+  toggleDeleteAccountForm(): void {
     this.showDeleteAccountForm = !this.showDeleteAccountForm;
   }
 
@@ -74,7 +82,7 @@ export class AccountComponent {
     return this.deleteIsInvalid('message') || this.deleteIsUntouched();
   }
 
-  deleteAccountSubmit() {
+  deleteAccountSubmit(): void {
     const id = this.userService.getCurrentUserId();
     const token = this.userService.getCurrentUserToken();
 
@@ -95,6 +103,14 @@ export class AccountComponent {
         }
       );
     }
+  }
+
+  toggleUpdatePasswordForm(): void {
+    this.showUpdatePasswordForm = !this.showUpdatePasswordForm;
+  }
+
+  updatePasswordSubmit() {
+    console.log("Submission working!");
   }
 
 }
