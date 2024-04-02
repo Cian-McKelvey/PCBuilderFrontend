@@ -71,6 +71,21 @@ export class WebService {
     return this.http.post('http://127.0.0.1:8000/api/v1.0/builds/new', data, { headers });
   }
 
+  callEditBuildEndpoint(partType: string, partName: string, partPrice: number, token: string, buildID: string) {
+    const url: string = "http://127.0.0.1:8000/api/v1.0/builds/" + buildID + "/edit";
+    const headers: HttpHeaders = new HttpHeaders().set('x-access-token', token);
+
+    const editData = {
+      "part_type": partType,
+      "new_part": {
+        "part_name": partName,
+        "price": partPrice
+      }
+    };
+
+    return this.http.put(url, editData, { headers });
+  }
+
   callFetchAllBuildsEndpoint(token: string, userID: string) {
     const headers: HttpHeaders = new HttpHeaders()
       .set('x-access-token', token)

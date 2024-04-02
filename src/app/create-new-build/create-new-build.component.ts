@@ -39,13 +39,7 @@ export class CreateNewBuildComponent {
     this.cpuArray = this.partsService.getCpuList();
     this.gpuArray= this.partsService.getGpuList();
     this.ramArray = this.partsService.getRamList();
-
-    // This one isn't loading correctly
     this.storageArray = this.partsService.getStorageList();
-    for (let i = 0; i < this.storageArray.length; i++) {
-      console.log(this.storageArray[i]);
-    }
-
     this.psuArray = this.partsService.getPsuList();
     this.motherboardArray = this.partsService.getMotherboardList();
     this.caseArray= this.partsService.getCaseList();
