@@ -104,13 +104,15 @@ export class PartsService {
       } else if (currentPart[0] === "RAM") {
         const [, partName, partPrice] = currentPart;
         ramList.push({ partName, partPrice });
-      } else if (currentPart[0] === "Storage") {
+        // Issue Here
+      } else if (currentPart[0] === "HDD" || currentPart[0] === "SSD") {
         const [, partName, partPrice] = currentPart;
         storageList.push({ partName, partPrice });
       } else if (currentPart[0] === "Motherboard") {
         const [, partName, partPrice] = currentPart;
         motherboardList.push({ partName, partPrice });
-      } else if (currentPart[0] === "PSU") {
+        // Issue Here
+      } else if (currentPart[0] === "Power Supply") {
         const [, partName, partPrice] = currentPart;
         psuList.push({ partName, partPrice });
       } else if (currentPart[0] === "Case") {

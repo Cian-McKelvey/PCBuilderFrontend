@@ -15,6 +15,14 @@
 
   </div>
 
+
+  <!-- Example code for creating a list that can be selected - Change this form the new parts
+    <label for="create-location">Location</label>
+    <select id="create-location" formControlName="location" class="form-control">
+      <option *ngFor="let city of cities_ireland" [value]="city">{{ city }}</option>
+    </select>
+   -->
+
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
 
     <h2 class="text-2xl font-bold col-span-2 mb-4">Your new build!</h2>
@@ -23,42 +31,93 @@
       <h3 class="text-lg font-bold">CPU</h3>
       <p>{{ buildInfo.CPU.value }}</p>
       <p>£{{ buildInfo.CPU.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the CPU</option>
+        <option *ngFor="let cpu of cpuArray" [value]="cpu.partName">
+          {{ cpu.partName }} - £{{ cpu.partPrice }}
+        </option>
+      </select>
+
     </div>
 
     <div>
       <h3 class="text-lg font-bold">Case</h3>
       <p>{{ buildInfo.Case.value }}</p>
       <p>£{{ buildInfo.Case.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the Case</option>
+        <option *ngFor="let myCase of caseArray" [value]="myCase.partName">
+          {{ myCase.partName }} - £{{ myCase.partPrice }}
+        </option>
+      </select>
+
     </div>
 
     <div>
       <h3 class="text-lg font-bold">GPU</h3>
       <p>{{ buildInfo.GPU.value }}</p>
       <p>£{{ buildInfo.GPU.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the GPU</option>
+        <option *ngFor="let gpu of gpuArray" [value]="gpu.partName">
+          {{ gpu.partName }} - £{{ gpu.partPrice }}
+        </option>
+      </select>
     </div>
 
     <div>
       <h3 class="text-lg font-bold">Motherboard</h3>
       <p>{{ buildInfo.Motherboard.value }}</p>
       <p>£{{ buildInfo.Motherboard.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the Motherboard</option>
+        <option *ngFor="let motherboard of motherboardArray" [value]="motherboard.partName">
+          {{ motherboard.partName }} - £{{ motherboard.partPrice }}
+        </option>
+      </select>
     </div>
 
     <div>
       <h3 class="text-lg font-bold">Power Supply</h3>
       <p>{{ buildInfo.PowerSupply.value }}</p>
       <p>£{{ buildInfo.PowerSupply.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the Power Supply</option>
+        <option *ngFor="let psu of psuArray" [value]="psu.partName">
+          {{ psu.partName }} - £{{ psu.partPrice }}
+        </option>
+      </select>
     </div>
 
     <div>
       <h3 class="text-lg font-bold">RAM</h3>
       <p>{{ buildInfo.RAM.value }}</p>
       <p>£{{ buildInfo.RAM.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the Ram</option>
+        <option *ngFor="let ram of ramArray" [value]="ram.partName">
+          {{ ram.partName }} - £{{ ram.partPrice }}
+        </option>
+      </select>
     </div>
 
     <div>
       <h3 class="text-lg font-bold">Storage</h3>
       <p>{{ buildInfo.Storage.value }}</p>
       <p>£{{ buildInfo.Storage.price }}</p>
+
+      <select>
+        <option value="" disabled selected>Click here to edit the Storage</option>
+        <option *ngFor="let storage of storageArray" [value]="storage.partName">
+          {{ storage.partName }} - £{{ storage.partPrice }}
+        </option>
+      </select>
     </div>
 
     <div>

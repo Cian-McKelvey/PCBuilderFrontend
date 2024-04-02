@@ -16,6 +16,15 @@ export class CreateNewBuildComponent {
   isBuildCreated: boolean = false;
   buildInfo: any = null;
 
+  cpuArray: any[] = [];
+  gpuArray: any[] = [];
+  ramArray: any[] = [];
+  storageArray: any[] = [];
+  motherboardArray: any[] = [];
+  psuArray: any[] = [];
+  caseArray: any[] = [];
+
+
   ngOnInit() {
     this.priceForm = this.formBuilder.group({
       // Verifies the price is inputted and is a valid whole number
@@ -23,15 +32,23 @@ export class CreateNewBuildComponent {
     });
 
     // Divides the parts into their separate part arrays using the partsService
-    let partsArray = this.storageService.getFromLocalStorage('PartsArray');
+    const partsArray = this.storageService.getFromLocalStorage('PartsArray');
     this.partsService.setAllSeparatePartLists(partsArray);
 
-    // Test to verify the data is being split into arrays correctly.
-    // let cpusTest = this.partsService.getCpuList();
-    // for (const cpu of cpusTest) {
-    //   console.log(cpu);
-    // }
+    // These arrays contain the parts of each type, allows for the editing of parts
+    this.cpuArray = this.partsService.getCpuList();
+    this.gpuArray= this.partsService.getGpuList();
+    this.ramArray = this.partsService.getRamList();
 
+    // This one isn't loading correctly
+    this.storageArray = this.partsService.getStorageList();
+    for (let i = 0; i < this.storageArray.length; i++) {
+      console.log(this.storageArray[i]);
+    }
+
+    this.psuArray = this.partsService.getPsuList();
+    this.motherboardArray = this.partsService.getMotherboardList();
+    this.caseArray= this.partsService.getCaseList();
   }
 
   constructor(public userService: UserService, public webService: WebService,
