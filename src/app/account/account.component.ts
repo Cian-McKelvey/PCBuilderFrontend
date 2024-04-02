@@ -16,7 +16,8 @@ export class AccountComponent {
   deleteAccountForm: any;
   updatePasswordForm: any;
 
-  constructor(private formBuilder: FormBuilder, public userService: UserService, private webService: WebService, private router: Router) {}
+  constructor(private formBuilder: FormBuilder, public userService: UserService,
+              private webService: WebService, private router: Router) {}
 
   ngOnInit() {
     // Delete Account Form
@@ -27,7 +28,9 @@ export class AccountComponent {
 
     // Update Password Form
     this.updatePasswordForm = this.formBuilder.group({
-      // Finish this here
+      username: ['', Validators.required],
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]] // Required length of 6
     });
   }
 
@@ -115,8 +118,30 @@ export class AccountComponent {
     this.showUpdatePasswordForm = !this.showUpdatePasswordForm;
   }
 
-  updatePasswordSubmit() {
-    console.log("Submission working!");
+  updatePasswordSubmit(): void {
+    const username = this.updatePasswordForm.value.username;
+    const oldPassword = this.updatePasswordForm.value.oldPassword;
+    const newPassword = this.updatePasswordForm.value.newPassword;
+    const token = this.userService.getCurrentUserToken();
+
+    if (token) {
+      this.webService.callUpdateUserPasswordEndpoint(username, oldPassword, newPassword, token).subscribe(
+        (response) => {
+          // Handle successful logout
+          console.log('Password updated:', response);
+          window.alert('Password Updated.');
+
+          // Calls the logout function afterward to reset the application
+          this.logout();
+        },
+        (error) => {
+          // Handle logout error
+          console.error('Password could not be updated:', error);
+          window.alert('Password change failed, check current password and try again.');
+        }
+      );
+    }
+
   }
 
 }
