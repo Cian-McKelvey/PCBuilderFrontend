@@ -26,7 +26,7 @@ export class AccountComponent {
     });
 
     // Update Password Form
-    this.deleteAccountForm = this.formBuilder.group({
+    this.updatePasswordForm = this.formBuilder.group({
       // Finish this here
     });
   }
@@ -67,6 +67,9 @@ export class AccountComponent {
     for the delete account functionality.
   */
   toggleDeleteAccountForm(): void {
+    if (this.showUpdatePasswordForm) {
+      this.toggleUpdatePasswordForm();
+    }
     this.showDeleteAccountForm = !this.showDeleteAccountForm;
   }
 
@@ -106,6 +109,9 @@ export class AccountComponent {
   }
 
   toggleUpdatePasswordForm(): void {
+    if (this.showDeleteAccountForm) {
+      this.toggleDeleteAccountForm();
+    }
     this.showUpdatePasswordForm = !this.showUpdatePasswordForm;
   }
 

@@ -2,7 +2,7 @@
 
   <app-navbar></app-navbar>
 
-  <div class="login-form bg-gray-900 text-white min-h-screen flex flex-col justify-center items-center">
+  <div class="login-form bg-white-900 text-white min-h-screen flex flex-col justify-center items-center">
 
 
     <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
@@ -10,10 +10,12 @@
     <button (click)="toggleUpdatePasswordForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Password</button>
 
 
-    <!--  Delete account form  -->
+    <!--  Delete account form, the last line in the form declaration ensures
+          you cant click enter to submit the form early  -->
     <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm"
           class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
-          (ngSubmit)="deleteAccountSubmit()">
+          (ngSubmit)="deleteAccountSubmit()"
+          (keydown.enter)="$event.preventDefault()">
 
       <label for="message" class="block text-gray-700 text-sm font-bold mb-2">You are attempting to delete {{ userService.getCurrentUserUsername() }} <br>
         Please enter "<strong>delete my account</strong>" to continue</label>
@@ -49,6 +51,6 @@
 
   </div>
 
-  <app-footer></app-footer>
+<!--  <app-footer></app-footer>-->
 
 </div>
