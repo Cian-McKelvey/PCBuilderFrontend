@@ -54,5 +54,29 @@ export class FetchAllBuildsComponent {
     }
   }
 
+  deleteBuild(buildId: string) {
+    const userID = this.userService.getCurrentUserId();
+    const token = this.userService.getCurrentUserToken();
+
+    if (userID && token) {
+      this.webService.callDeleteBuildEndpoint(userID, buildId, token).subscribe(
+        (response: any) => {
+          console.log('Full response:', response);
+          window.alert('Build Deleted Successfully');
+
+          // Refreshes the page to load the list again
+          location.reload();
+
+        },
+        (error: any) => {
+          console.error('Error deleting build', error);
+          window.alert('Failed to delete build.');
+        });
+    } else {
+      console.log("No valid token detect, log out then in to reset");
+      window.alert("No valid token detect, log out then in to reset");
+    }
+  }
+
 
 }
