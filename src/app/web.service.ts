@@ -86,6 +86,13 @@ export class WebService {
     return this.http.put(url, editData, { headers });
   }
 
+  callUpdateBuildEndpoint(buildDict: {}, buildID: string, token: string) {
+    const url: string = "http://127.0.0.1:8000/api/v1.0/builds/" + buildID + "/replace";
+    const headers: HttpHeaders = new HttpHeaders().set('x-access-token', token);
+
+    return this.http.put(url, buildDict, { headers });
+  }
+
   callFetchAllBuildsEndpoint(token: string, userID: string) {
     const headers: HttpHeaders = new HttpHeaders()
       .set('x-access-token', token)

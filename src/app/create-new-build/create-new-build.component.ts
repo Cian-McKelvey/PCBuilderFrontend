@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../user.service";
 import {WebService} from "../web.service";
 import {FormBuilder, Validators} from "@angular/forms";
@@ -12,10 +12,12 @@ import {PartsService} from "../parts.service";
 })
 export class CreateNewBuildComponent {
 
+  // Default variables that are used no matter what
   priceForm: any;
   isBuildCreated: boolean = false;
   buildInfo: any = null;
 
+  // Arrays that hold each of the individual part grouped by type
   cpuArray: any[] = [];
   gpuArray: any[] = [];
   ramArray: any[] = [];
@@ -23,6 +25,10 @@ export class CreateNewBuildComponent {
   motherboardArray: any[] = [];
   psuArray: any[] = [];
   caseArray: any[] = [];
+
+  // Variable that hold parts so that fetched builds can be edited
+  selectedParts: { [key: string]: { partName: string, partPrice: number } } = {};
+  editedPartsCount: number = 0;
 
   ngOnInit() {
     this.priceForm = this.formBuilder.group({
@@ -42,11 +48,15 @@ export class CreateNewBuildComponent {
     this.psuArray = this.partsService.getPsuList();
     this.motherboardArray = this.partsService.getMotherboardList();
     this.caseArray= this.partsService.getCaseList();
+
+    // Sets the editedParts count to 0
+    this.editedPartsCount = 0;
   }
 
   constructor(public userService: UserService, public webService: WebService,
               private formBuilder: FormBuilder, public storageService: StorageService,
               private partsService: PartsService) {}
+
 
   isInvalid(control: string): boolean {
     return (
@@ -79,6 +89,9 @@ export class CreateNewBuildComponent {
             // Assign the response data to the buildInfo property
             this.buildInfo = response;
             this.buildInfo = this.buildInfo.Build;
+            console.log(this.buildInfo);
+
+            this.editedPartsCount = 0;  // Resets the edited parts counter for the new build
 
             // Print the entire buildInfo object to the console
             console.log('buildInfo:', this.buildInfo);
@@ -108,6 +121,57 @@ export class CreateNewBuildComponent {
           // Add more here to update the page or whatever
 
           console.log('Build edit successful', response);
+          window.alert("Build has been updated");
+        },
+        (error) => {
+          console.error('Error editing build', error);
+          // Handle error
+          window.alert('Failed to edit build. Please try again.');
+        }
+      );
+    }
+    else {
+      console.error('Token expired');
+      window.alert("Token Expired");
+    }
+  }
+
+  calculateTotalPrice(items: any): number {
+    let totalPrice = 0;
+
+    // Iterate over each item in the object and accumulate the prices
+    Object.keys(items).forEach(key => {
+      // Check if the current property is not one of the meta-properties like "OverallPrice", "build_id", etc.
+      if (typeof items[key] === 'object' && key !== 'OverallPrice' && !key.endsWith('_id')) {
+        totalPrice += items[key].price;
+      }
+    });
+
+    return totalPrice;
+  }
+
+  updatePart(partName: string): void {
+    const selectedPart = this.selectedParts[partName];
+    if (selectedPart) {
+      this.buildInfo[partName] = {
+        price: selectedPart.partPrice,
+        value: selectedPart.partName,
+      };
+      this.buildInfo['OverallPrice'] = this.calculateTotalPrice(this.buildInfo);
+      this.editedPartsCount++;
+    }
+  }
+
+  submitBuildReplacement(): void {
+    const token = this.userService.getCurrentUserToken();
+    if (token) {
+      this.webService.callUpdateBuildEndpoint(this.buildInfo, this.buildInfo.build_id, token).subscribe(
+        (response) => {
+
+          // This only updates it on the db, doesn't show any new info or anything
+          // Add more here to update the page or whatever
+
+          console.log('Build has been replace with the new build to reflect aimed changes:', response);
           window.alert("Build has been updated");
         },
         (error) => {
