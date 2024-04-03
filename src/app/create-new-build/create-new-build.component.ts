@@ -24,7 +24,6 @@ export class CreateNewBuildComponent {
   psuArray: any[] = [];
   caseArray: any[] = [];
 
-
   ngOnInit() {
     this.priceForm = this.formBuilder.group({
       // Verifies the price is inputted and is a valid whole number
@@ -56,12 +55,12 @@ export class CreateNewBuildComponent {
     );
   }
 
-// Helper function for isIncomplete - Used to check if any parts of the form have been touched
+  // Helper function for isIncomplete - Used to check if any parts of the form have been touched
   isUntouched(): boolean {
     return this.priceForm.controls.price.pristine;
   }
 
-// Checks if the form is incomplete in any way, such as incorrect inputs
+  // Checks if the form is incomplete in any way, such as incorrect inputs
   isIncomplete(): boolean {
     return this.isInvalid('price') || this.isUntouched();
   }
@@ -99,5 +98,29 @@ export class CreateNewBuildComponent {
     }
   }
 
+  submitBuildUpdate(partType: string, partName: string, partPrice: number, buildID: string) {
+    const token = this.userService.getCurrentUserToken();
+    if (token) {
+      this.webService.callEditBuildEndpoint(partType, partName, partPrice, token, buildID).subscribe(
+        (response) => {
+
+          // This only updates it on the db, doesn't show any new info or anything
+          // Add more here to update the page or whatever
+
+          console.log('Build edit successful', response);
+          window.alert("Build has been updated");
+        },
+        (error) => {
+          console.error('Error editing build', error);
+          // Handle error
+          window.alert('Failed to edit build. Please try again.');
+        }
+      );
+    }
+    else {
+      console.error('Token expired');
+      window.alert("Token Expired");
+    }
+  }
 
 }
