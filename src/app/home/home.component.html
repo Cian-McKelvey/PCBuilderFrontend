@@ -39,6 +39,9 @@
   <h1>PC Build Generator</h1>
   <h3>Welcome Back!!!</h3>
   <p>You are currently logged in as {{ userService.getCurrentUserUsername() }}</p>
+  <div *ngIf="this.userService.getIsUserAdmin()">
+    <p>Your account has admin rights!!!</p>
+  </div>
 
   <app-footer></app-footer>
 

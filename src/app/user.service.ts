@@ -10,6 +10,7 @@ export class UserService {
   currentUserUsername: string;
   currentUserToken: string;
   isUserLoggedIn: boolean;
+  isUserAdmin: boolean;
 
   /*
   Variables are initialised in the constructor. Could just initialise them by setting values in
@@ -20,6 +21,7 @@ export class UserService {
     this.currentUserUsername = '';
     this.currentUserToken = '';
     this.isUserLoggedIn = false;
+    this.isUserAdmin = false;
   }
 
   // Collection of getters and setters for using the data
@@ -74,6 +76,20 @@ export class UserService {
     const isLoggedInStatus = this.storageService.getFromLocalStorage("isLoggedIn");
     if (isLoggedInStatus != null) {
       return isLoggedInStatus;
+    } else {
+      return null;
+    }
+  }
+
+  setIsUserAdmin(status: boolean): void {
+    this.isUserAdmin = status;
+    this.storageService.saveToLocalStorage("isUserAdmin", status);
+  }
+
+  getIsUserAdmin(): boolean | null {
+    const isUserAdminStatus = this.storageService.getFromLocalStorage("isUserAdmin");
+    if (isUserAdminStatus != null) {
+      return isUserAdminStatus;
     } else {
       return null;
     }

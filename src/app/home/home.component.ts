@@ -35,12 +35,14 @@ export class HomeComponent {
           // Access the token and user_id from the response
           const token = data.token;
           const userId = data.user_id;
+          const adminStatus = data.is_admin;
 
           // Set current user username, password, token and user_id in the user service as well as login status
           this.userService.setCurrentUserUsername(this.loginForm.value.username);
           this.userService.setCurrentUserToken(token);
           this.userService.setCurrentUserId(userId);
           this.userService.setIsUserLoggedIn(true);
+          this.userService.setIsUserAdmin(adminStatus);
 
           window.alert("Login Successful");
 

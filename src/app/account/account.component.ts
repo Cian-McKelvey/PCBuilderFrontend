@@ -44,6 +44,7 @@ export class AccountComponent {
           console.log('Logout successful:', response);
 
           this.userService.setIsUserLoggedIn(false);
+          this.userService.setIsUserAdmin(false);
           this.userService.setCurrentUserId('');
           this.userService.setCurrentUserUsername('');
           this.userService.setCurrentUserToken('');
