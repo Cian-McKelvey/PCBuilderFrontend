@@ -1,0 +1,4 @@
+.pagination-controls ::ng-deep .ngx-pagination .current {
+  margin-top: 20px;
+  background: #ffc107;
+}

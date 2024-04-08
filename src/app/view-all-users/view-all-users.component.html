@@ -1,0 +1,40 @@
+<div *ngIf="userService.getIsUserLoggedIn() && userService.getIsUserAdmin()">
+
+  <div class="return_buttons">
+    <button (click)="returnHome()">Go back to Homepage</button>
+    <br>
+    <button (click)="returnToAdmin()">Go Back to Admin Page</button>
+  </div>
+
+  <div>
+
+    <!-- Show the users once a response has been received -->
+    <div *ngIf="areUsersFetched && userAccounts.length > 0">
+      <div class="p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let user of userAccounts | paginate: { itemsPerPage: 10, currentPage: pageNum }">
+
+        <div>
+          <h3 class="text-lg font-bold">{{ user.username }}</h3>
+          <p>{{ user.registration_date }}</p>
+          <p>{{ user.user_id }}</p>
+          <button (click)="adminDeleteUser(user.user_id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete This User</button>
+        </div>
+
+      </div>
+
+      <!-- Pagination controls reference "pageNum" from the TypeScript file -->
+      <pagination-controls class="pagination-controls" (pageChange)="pageNum = $event"></pagination-controls>
+
+    </div>
+
+    <div *ngIf="areUsersFetched && userAccounts.length === 0">
+      <h1>There are no users of the site currently</h1>
+    </div>
+
+    <!-- Show a loading message while users are being fetched -->
+    <div *ngIf="!areUsersFetched">
+      <p>Loading users...</p>
+    </div>
+
+  </div>
+
+</div>

@@ -13,6 +13,8 @@ import { AccountComponent } from './account/account.component';
 import { CreateNewBuildComponent } from './create-new-build/create-new-build.component';
 import { FetchAllBuildsComponent } from './fetch-all-builds/fetch-all-builds.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { AdminComponent } from './admin/admin.component';
+import { ViewAllUsersComponent } from './view-all-users/view-all-users.component';
 
 const routes: any = [
   {
@@ -34,6 +36,14 @@ const routes: any = [
   {
     path: 'new-build',
     component: CreateNewBuildComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent
+  },
+  {
+    path: 'admin/all-users',
+    component: ViewAllUsersComponent
   }
 ]
 
@@ -46,7 +56,9 @@ const routes: any = [
     FooterComponent,
     AccountComponent,
     CreateNewBuildComponent,
-    FetchAllBuildsComponent
+    FetchAllBuildsComponent,
+    AdminComponent,
+    ViewAllUsersComponent
   ],
   imports: [
     BrowserModule,

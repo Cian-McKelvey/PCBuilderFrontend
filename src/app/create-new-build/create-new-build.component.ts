@@ -77,8 +77,8 @@ export class CreateNewBuildComponent {
 
   submitPrice() {
     const buildPrice = this.priceForm.value.price;
-    const token = this.userService.getCurrentUserToken(); // Assuming you have userToken available
-    const userID = this.userService.getCurrentUserId(); // Assuming you have userID available
+    const token = this.userService.getCurrentUserToken();
+    const userID = this.userService.getCurrentUserId();
 
     if (this.priceForm.valid && token && userID) {
       this.webService.callCreateNewBuildEndpoint(buildPrice.toString(), token, userID)

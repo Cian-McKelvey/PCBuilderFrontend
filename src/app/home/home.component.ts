@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {WebService} from "../web.service";
 import {UserService} from "../user.service";
 import {StorageService} from "../storage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import {StorageService} from "../storage.service";
 export class HomeComponent {
 
   constructor(private formBuilder: FormBuilder, public webService: WebService,
-              public userService: UserService, public storageService: StorageService) {}
+              public userService: UserService, public storageService: StorageService,
+              public router: Router) {}
 
   loginForm: any;
 
@@ -44,11 +46,25 @@ export class HomeComponent {
           this.userService.setIsUserLoggedIn(true);
           this.userService.setIsUserAdmin(adminStatus);
 
+          // this.webService.callCSRFTokenEndpoint().subscribe(
+          //   (data: any): void => {
+          //     const csrfToken = data.csrf_token;
+          //     console.log('CSRF Token generated');
+          //     console.log(csrfToken);
+          //     this.userService.setCurrentUserCSRFToken(csrfToken);
+          //   },
+          //   (error: any) => {
+          //     console.error('Error occurred while fetching CSRF token:', error);
+          //   }
+          // );
+
+
           window.alert("Login Successful");
 
           // Once logged in, set the parts list to local storage
-          let currentToken = this.userService.getCurrentUserToken();
-          if (currentToken != null) {
+          const currentToken = this.userService.getCurrentUserToken();
+
+          if (currentToken) {
             this.webService.callFetchAllPartsEndpoint(currentToken)
               .toPromise()
               .then((response: any) => {
@@ -80,35 +96,7 @@ export class HomeComponent {
     return this.loginForm.controls[control].invalid && this.loginForm.controls[control].touched;
   }
 
-
-  logout() {
-    const currentToken = this.userService.getCurrentUserToken();
-
-    if (currentToken) {
-      this.webService.callLogout(currentToken).subscribe(
-        (response) => {
-          // Handle successful logout
-          console.log('Logout successful:', response);
-          window.alert('Logout Successful!');
-
-          this.userService.setIsUserLoggedIn(false);
-          this.userService.setCurrentUserId("");
-          this.userService.setCurrentUserUsername("");
-          this.userService.setCurrentUserToken("");
-
-          location.reload(); // Reloading everything refreshes all the pages and clears all the current user variables
-        },
-        (error) => {
-          // Handle logout error
-          console.error('Logout error:', error);
-          window.alert('Logout Failed');
-        }
-      );
-    }
-    else {
-      console.error("LOGOUT ERROR, no valid token present");
-      window.alert("LOGOUT ERROR, no valid token present");
-    }
+  goToAdminPage(){
+    this.router.navigate(['/admin']);
   }
-
 }

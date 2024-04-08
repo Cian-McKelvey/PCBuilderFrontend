@@ -11,6 +11,7 @@ export class UserService {
   currentUserToken: string;
   isUserLoggedIn: boolean;
   isUserAdmin: boolean;
+  userCSRFToken: string;
 
   /*
   Variables are initialised in the constructor. Could just initialise them by setting values in
@@ -20,8 +21,23 @@ export class UserService {
     this.currentUserId = '';
     this.currentUserUsername = '';
     this.currentUserToken = '';
+    this.userCSRFToken = '';
     this.isUserLoggedIn = false;
     this.isUserAdmin = false;
+  }
+
+  setCurrentUserCSRFToken(csrfToken: string): void {
+    this.userCSRFToken = csrfToken;
+    this.storageService.saveToLocalStorage("csrfToken", csrfToken);
+  }
+
+  getCurrentUserCSRFToken() : string | null {
+    const currentCSRF = this.storageService.getFromLocalStorage("csrfToken");
+    if (currentCSRF != null) {
+      return currentCSRF;
+    } else {
+      return null;
+    }
   }
 
   // Collection of getters and setters for using the data

@@ -48,6 +48,7 @@ export class AccountComponent {
           this.userService.setCurrentUserId('');
           this.userService.setCurrentUserUsername('');
           this.userService.setCurrentUserToken('');
+          this.userService.setCurrentUserCSRFToken('');
 
           // reroute home
           this.router.navigate(['/']);

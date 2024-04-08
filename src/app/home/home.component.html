@@ -28,7 +28,7 @@
 
 
 <!--Displays a background image, welcome message, and current user's username when logged in-->
-<div *ngIf="userService.getIsUserLoggedIn()" class="centered-container">
+<div *ngIf="userService.getIsUserLoggedIn()">
 
   <!--  <div class="background-image">-->
   <!--    <img [src]="'assets/HomepageBackground.png'" alt="Homepage Background" height="1308" width="2324">-->
@@ -40,7 +40,8 @@
   <h3>Welcome Back!!!</h3>
   <p>You are currently logged in as {{ userService.getCurrentUserUsername() }}</p>
   <div *ngIf="this.userService.getIsUserAdmin()">
-    <p>Your account has admin rights!!!</p>
+    <p>ADMIN RIGHTS DETECTED</p>
+    <button (click)="goToAdminPage()">Go to Admin Page</button>
   </div>
 
   <app-footer></app-footer>

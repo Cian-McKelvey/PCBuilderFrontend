@@ -10,6 +10,15 @@ export class WebService {
   constructor(private http: HttpClient) {}
 
   /*
+    Endpoint that fetches a csrf token on app startup to prevent XSS
+  */
+
+  callCSRFTokenEndpoint() {
+    return this.http.get('http://127.0.0.1:8000/api/v1.0/csrf-token');
+  }
+
+
+  /*
     Endpoints for user functionality.
     Includes: Login, Logout, Create Account, Update Password, Delete Account
   */
@@ -108,6 +117,27 @@ export class WebService {
       .set("x-user-id", userID);
 
     return this.http.delete(url,{ headers });
+  }
+
+  /*
+    ADMIN ENDPOINT CALLS
+  */
+
+  callAppDataEndpoint(token: string) {
+    const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+    return this.http.get('http://127.0.0.1:8000/api/v1.0/admin/app-data', { headers })
+  }
+
+  callFetchAllUsersEndpoint(token: string) {
+    const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+    return this.http.get('http://127.0.0.1:8000/api/v1.0/admin/fetch-all-users', { headers })
+  }
+
+  callAdminDeleteUserEndpoint(token: string, userID: string) {
+    const url: string = "http://127.0.0.1:8000/api/v1.0/admin/delete-user/" + userID;
+    const headers: HttpHeaders = new HttpHeaders().set("x-access-token", token);
+
+    return this.http.delete(url, { headers });
   }
 
 }

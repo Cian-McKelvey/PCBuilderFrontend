@@ -1,0 +1,30 @@
+<div *ngIf="this.userService.getIsUserAdmin() && userService.getIsUserLoggedIn()">
+
+  <h1>ADMIN RIGHTS DETECTED!</h1>
+
+  <hr>
+
+  <h3>Admin info is:</h3>
+
+  <p>
+    Current Site User Count: {{ appInfo.num_users }} <br>
+    There are {{ appInfo.num_builds }} pc builds stored currently! <br>
+  </p>
+
+  <div>
+    The database has used {{ appInfo.used_storage }} out of the available {{ appInfo.available_storage }} bytes.
+    <!-- Calculate the percentage -->
+    <span *ngIf="appInfo.available_storage !== 0">
+        ({{ (appInfo.used_storage / appInfo.available_storage * 100).toFixed(2) }}%)
+      </span>
+    <!-- Handle the case where available_storage is 0 -->
+    <span *ngIf="appInfo.available_storage === 0">
+        (N/A)
+      </span>
+  </div>
+
+  <button (click)="viewAllUsersPage()">View all site users</button>
+
+</div>
+
+<button (click)="returnHome()">Go back to Homepage</button>
