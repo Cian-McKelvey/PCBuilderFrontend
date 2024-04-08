@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {WebService} from "../web.service";
 import {UserService} from "../user.service";
 import {Router} from "@angular/router";
@@ -14,7 +14,9 @@ export class ViewAllUsersComponent {
   pageNum: number = 1;  // Pagination control variable
   areUsersFetched: boolean = false;
 
-  constructor(public webService: WebService, public userService: UserService, public router: Router) {}
+  constructor(public webService: WebService,
+              public userService: UserService,
+              public router: Router, public cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     const adminStatus = this.userService.getIsUserAdmin();
@@ -28,6 +30,9 @@ export class ViewAllUsersComponent {
             this.userAccounts = data.users;
             console.log("user accounts fetched");
             this.areUsersFetched = true;
+
+            // Manually trigger change detection to update the UI
+            this.cdr.detectChanges();
           },
           (error) => {
             console.error('Error fetching app data:', error);

@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class AdminComponent {
 
   appInfo: any;  // Holds the admin app data if there is any
+  isAppInfoLoaded: boolean = false;
 
   constructor(public webService: WebService, public userService: UserService, public router: Router) {}
 
@@ -22,8 +23,8 @@ export class AdminComponent {
       this.webService.callAppDataEndpoint(currentToken)
         .subscribe(
           (data: any) => {
-            console.log('Received admin app data:', data);
             this.appInfo = data.AppInfo;
+            this.isAppInfoLoaded = true;
           },
           (error) => {
             console.error('Error fetching app data:', error);

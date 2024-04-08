@@ -58,7 +58,7 @@ export class HomeComponent {
           //   }
           // );
 
-
+          console.log("Login Successful")
           window.alert("Login Successful");
 
           // Once logged in, set the parts list to local storage
