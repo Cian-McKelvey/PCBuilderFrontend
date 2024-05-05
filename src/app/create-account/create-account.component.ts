@@ -16,27 +16,25 @@ export class CreateAccountComponent {
 
   ngOnInit(): void {
     this.createAccountForm = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      consent: ['', Validators.requiredTrue]
     });
   }
 
   onCreateAccountSubmit(): void {
     // Check if the form is valid
-    if (this.createAccountForm.valid) {
+    if (this.createAccountForm.valid && this.createAccountForm.get('consent').value) {
       // Form is valid, perform signup action here
       console.log('Form submitted successfully!');
 
       // Access form values and assign to variables to pass as parameters
-      const firstname = this.createAccountForm.get('firstname').value;
-      const lastname = this.createAccountForm.get('lastname').value;
       const username = this.createAccountForm.get('username').value;
       const password = this.createAccountForm.get('password').value;
 
       // You can now send the form data to your backend API for signup process
-      this.webService.callCreateAccountEndpoint(firstname, lastname, username, password).subscribe(
+      // Needs to remove firstname and lastname args in the method call
+      this.webService.callCreateAccountEndpoint(username, password).subscribe(
         (response: any) => {
           console.log('Full response:', response);
           window.alert('Account creation successful');

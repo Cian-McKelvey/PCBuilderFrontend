@@ -1,59 +1,119 @@
-<div *ngIf="userService.getIsUserLoggedIn()" class="centered-container">
+<!--<div *ngIf="userService.getIsUserLoggedIn()" class="centered-container">-->
+
+<!--  <app-navbar></app-navbar>-->
+
+<!--  <div class="login-form bg-white-900 text-white min-h-screen flex flex-col justify-center items-center">-->
+
+
+<!--    <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>-->
+<!--    <button (click)="toggleDeleteAccountForm()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete Account</button>-->
+<!--    <button (click)="toggleUpdatePasswordForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Password</button>-->
+
+
+<!--    &lt;!&ndash;-->
+<!--    Delete account form, the last line in the form declaration ensures-->
+<!--    you cant click enter to submit the form early.-->
+<!--    Delete button only appears when message is typed and autocomplete is disabled-->
+<!--    &ndash;&gt;-->
+<!--    <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm"-->
+<!--          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"-->
+<!--          (ngSubmit)="deleteAccountSubmit()"-->
+<!--          (keydown.enter)="$event.preventDefault()"-->
+<!--          autocomplete="off">-->
+
+<!--      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">-->
+<!--        You are attempting to delete {{ userService.getCurrentUserUsername() }} <br>-->
+<!--        Please enter "<strong>delete my account</strong>" to continue</label>-->
+
+<!--      <input type="text" id="message" formControlName="message"-->
+<!--             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none-->
+<!--         focus:shadow-outline" [ngClass]="{ 'error': deleteIsInvalid('message') }"-->
+<!--             autocomplete="off">-->
+
+<!--      <button *ngIf="!deleteIsIncomplete()" type="submit"-->
+<!--              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none-->
+<!--          focus:shadow-outline">Delete</button>-->
+<!--    </form>-->
+
+
+<!--    &lt;!&ndash;  Update password form  &ndash;&gt;-->
+<!--    <form *ngIf="showUpdatePasswordForm" [formGroup]="updatePasswordForm"-->
+<!--          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"-->
+<!--          (ngSubmit)="updatePasswordSubmit()">-->
+
+<!--      <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>-->
+<!--      <input type="text" id="username" formControlName="username"-->
+<!--             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">-->
+<!--             &lt;!&ndash;[ngClass]="{ 'error': deleteIsInvalid('message') }" &ndash;&gt;-->
+
+<!--      <label for="oldPassword" class="block text-gray-700 text-sm font-bold mb-2">Old Password</label>-->
+<!--      <input type="password" id="oldPassword" formControlName="oldPassword"-->
+<!--             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">-->
+
+<!--      <label for="newPassword" class="block text-gray-700 text-sm font-bold mb-2">New Password</label>-->
+<!--      <input type="password" id="newPassword" formControlName="newPassword"-->
+<!--             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">-->
+
+<!--      <button type="submit"-->
+<!--              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Change Password</button>-->
+
+<!--    </form>-->
+
+<!--  </div>-->
+
+<!--</div>-->
+
+<!--
+    Delete account form, the last line in the form declaration ensures
+    you cant click enter to submit the form early.
+    Delete button only appears when message is typed and autocomplete is disabled
+    -->
+
+<div *ngIf="userService.getIsUserLoggedIn()">
 
   <app-navbar></app-navbar>
 
-  <div class="login-form bg-white-900 text-white min-h-screen flex flex-col justify-center items-center">
+  <div class="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
 
+    <div class="max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden">
+      <div class="px-6 py-4 flex justify-between items-center bg-[#333] text-white">
+        <h2 class="text-xl font-semibold">Account Settings</h2>
+        <div>
+          <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out focus:outline-none focus:shadow-outline">Logout</button>
+        </div>
+      </div>
 
-    <button (click)="logout()" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Logout</button>
-    <button (click)="toggleDeleteAccountForm()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete Account</button>
-    <button (click)="toggleUpdatePasswordForm()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update Password</button>
+      <div class="px-6 py-4">
+        <button (click)="toggleDeleteAccountForm()" class="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline mb-4">Delete Account</button>
+        <button (click)="toggleUpdatePasswordForm()" class="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline">Update Password</button>
+      </div>
 
+      <!-- Delete account form -->
+      <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm" class="px-6 py-4" (ngSubmit)="deleteAccountSubmit()" (keydown.enter)="$event.preventDefault()" autocomplete="off">
+        <label for="message" class="block text-gray-700 text-lg font-bold mb-2">
+          You are attempting to delete {{ userService.getCurrentUserUsername() }} <br>
+          Please enter "<strong>delete my account</strong>" to continue
+        </label>
 
-    <!--  Delete account form, the last line in the form declaration ensures
-          you cant click enter to submit the form early  -->
-    <form *ngIf="showDeleteAccountForm" [formGroup]="deleteAccountForm"
-          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
-          (ngSubmit)="deleteAccountSubmit()"
-          (keydown.enter)="$event.preventDefault()">
+        <input type="text" id="message" formControlName="message" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-yellow-500 focus:ring-yellow-500" [ngClass]="{ 'error': deleteIsInvalid('message') }" autocomplete="off">
 
-      <label for="message" class="block text-gray-700 text-sm font-bold mb-2">You are attempting to delete {{ userService.getCurrentUserUsername() }} <br>
-        Please enter "<strong>delete my account</strong>" to continue</label>
+        <button *ngIf="!deleteIsIncomplete()" type="submit" class="w-full  bg-[#333] hover:bg-[#444] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mt-4">Delete</button>
+      </form>
 
-      <input type="text" id="message" formControlName="message"
-             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-             [ngClass]="{ 'error': deleteIsInvalid('message') }">
+      <!-- Update password form -->
+      <form *ngIf="showUpdatePasswordForm" [formGroup]="updatePasswordForm" class="px-6 py-4" (ngSubmit)="updatePasswordSubmit()">
+        <label for="username" class="block text-gray-700 text-lg font-bold mb-2">Username</label>
+        <input type="text" id="username" formControlName="username" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#333] focus:ring-[#333]">
 
-      <button *ngIf="!deleteIsIncomplete()" type="submit"
-              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
-    </form>
+        <label for="oldPassword" class="block text-gray-700 text-lg font-bold mb-2 mt-4">Old Password</label>
+        <input type="password" id="oldPassword" formControlName="oldPassword" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#333] focus:ring-[#333]">
 
+        <label for="newPassword" class="block text-gray-700 text-lg font-bold mb-2 mt-4">New Password</label>
+        <input type="password" id="newPassword" formControlName="newPassword" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-[#333] focus:ring-[#333]">
 
-    <!--  Update password form  -->
-    <form *ngIf="showUpdatePasswordForm" [formGroup]="updatePasswordForm"
-          class="max-w-md w-full px-6 py-8 shadow-lg bg-white rounded-lg"
-          (ngSubmit)="updatePasswordSubmit()">
-
-      <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-      <input type="text" id="username" formControlName="username"
-             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-             <!--[ngClass]="{ 'error': deleteIsInvalid('message') }" -->
-
-      <label for="oldPassword" class="block text-gray-700 text-sm font-bold mb-2">Old Password</label>
-      <input type="password" id="oldPassword" formControlName="oldPassword"
-             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-
-      <label for="newPassword" class="block text-gray-700 text-sm font-bold mb-2">New Password</label>
-      <input type="password" id="newPassword" formControlName="newPassword"
-             class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-
-      <button type="submit"
-              class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Change Password</button>
-
-    </form>
-
+        <button type="submit" class="w-full bg-[#333] hover:bg-[#444] text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline mt-4">Change Password</button>
+      </form>
+    </div>
   </div>
-
-<!--  <app-footer></app-footer>-->
 
 </div>

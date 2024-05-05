@@ -82,12 +82,9 @@ export class AccountComponent {
     return this.deleteAccountForm.controls[control].invalid && this.deleteAccountForm.controls[control].touched;
   }
 
-  deleteIsUntouched(): boolean {
-    return this.deleteAccountForm.controls.message.pristine;
-  }
-
   deleteIsIncomplete(): boolean {
-    return this.deleteIsInvalid('message') || this.deleteIsUntouched();
+    const messageControl = this.deleteAccountForm.controls.message;
+    return messageControl.invalid || messageControl.pristine || (messageControl.valid && !messageControl.touched);
   }
 
   deleteAccountSubmit(): void {

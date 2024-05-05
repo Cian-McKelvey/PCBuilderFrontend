@@ -39,10 +39,8 @@ export class WebService {
     return this.http.get('http://127.0.0.1:8000/api/v1.0/logout', { headers });
   }
 
-  callCreateAccountEndpoint(firstName: string, lastName: string, username: string, password: string) {
+  callCreateAccountEndpoint(username: string, password: string) {
     let createForm: FormData = new FormData();
-    createForm.append("first_name", firstName);
-    createForm.append("last_name", lastName);
     createForm.append("username", username);
     createForm.append("password", password);
 

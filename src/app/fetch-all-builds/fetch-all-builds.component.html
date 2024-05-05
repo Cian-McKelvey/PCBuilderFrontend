@@ -9,7 +9,6 @@
     <div *ngIf="areBuildsFetched && buildsByAccount.length > 0">
       <div class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
 
-        <!-- Below is used to display each build, can create classes then add styling etc... -->
         <div>
           <h3 class="text-lg font-bold">CPU</h3>
           <p>{{ buildInfo.CPU.value }}</p>
@@ -74,13 +73,13 @@
 
     </div>
 
-    <div *ngIf="areBuildsFetched && buildsByAccount.length === 0">
-      <h1>No builds have been created on this account - Create a build to get started!</h1>
+    <div *ngIf="areBuildsFetched && buildsByAccount.length === 0" class="p-4 bg-gray-100 border border-gray-300 rounded-md">
+      <h1 class="text-xl font-bold text-gray-800">No builds have been created on this account - Create a build to get started!</h1>
     </div>
 
     <!-- Show a loading message while builds are being fetched -->
-    <div *ngIf="!areBuildsFetched">
-      <p>Loading builds...</p>
+    <div *ngIf="!areBuildsFetched" class="p-4 bg-gray-100 border border-gray-300 rounded-md">
+      <p class="text-gray-800">Loading builds...</p>
     </div>
   </div>
 </div>

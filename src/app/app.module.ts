@@ -62,7 +62,7 @@ const routes: any = [
   ],
   imports: [
     BrowserModule,
-    HttpClientModule, // Allows Http requests
+    HttpClientModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     FormsModule,
