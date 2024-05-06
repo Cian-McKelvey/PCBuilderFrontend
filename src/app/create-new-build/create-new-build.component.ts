@@ -32,8 +32,12 @@ export class CreateNewBuildComponent {
 
   ngOnInit() {
     this.priceForm = this.formBuilder.group({
-      // Verifies the price is inputted and is a valid whole number under 2000
-      price: ['', [Validators.required, Validators.pattern(/^(?:500|[1-9]\d{2,3}|1\d{3}|2000)$/)]]
+      price: ['', [
+        Validators.required,
+        Validators.pattern(/^[0-9]+$/),
+        Validators.min(500),
+        Validators.max(2000)
+      ]]
     });
 
     // Divides the parts into their separate part arrays using the partsService
