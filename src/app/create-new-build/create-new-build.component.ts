@@ -32,8 +32,8 @@ export class CreateNewBuildComponent {
 
   ngOnInit() {
     this.priceForm = this.formBuilder.group({
-      // Verifies the price is inputted and is a valid whole number
-      price: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]]
+      // Verifies the price is inputted and is a valid whole number under 2000
+      price: ['', [Validators.required, Validators.pattern(/^(?:0|[1-9]\d{0,2}|2000)$/)]]
     });
 
     // Divides the parts into their separate part arrays using the partsService
@@ -77,6 +77,16 @@ export class CreateNewBuildComponent {
 
   submitPrice() {
     const buildPrice = this.priceForm.value.price;
+    if (buildPrice > 2000) {
+      window.alert("Build price to high, max value 2000");
+    }
+    if (buildPrice < 0) {
+      window.alert("Build price must be a positive number");
+    }
+    if (typeof buildPrice !== 'number') {
+      window.alert("Price must be entered as a whole number")
+    }
+
     const token = this.userService.getCurrentUserToken();
     const userID = this.userService.getCurrentUserId();
 

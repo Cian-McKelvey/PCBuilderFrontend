@@ -3,17 +3,17 @@
   <app-navbar></app-navbar>
 
   <div *ngIf="!isBuildCreated">
-    <form [formGroup]="priceForm" (ngSubmit)="submitPrice()">
-      <label for="priceInput">Enter Price:</label>
-      <input type="number" id="priceInput" formControlName="price" />
+    <form [formGroup]="priceForm" (ngSubmit)="submitPrice()" class="max-w-md mx-auto bg-white rounded-lg shadow-xl p-6 mt-15">
+      <label for="priceInput" class="block text-gray-700">Enter Price:</label>
+      <input type="number" id="priceInput" formControlName="price" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#333] focus:ring focus:ring-[#333] focus:ring-opacity-50">
 
-      <span *ngIf="isIncomplete()">Please enter a valid price</span>
-      <button *ngIf="!isIncomplete()" type="submit" class="btn btn-primary">Submit</button>
+      <span *ngIf="isIncomplete()" class="text-red-500">Please enter a valid price up to £2000</span>
+      <button *ngIf="!isIncomplete()" type="submit" class="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out focus:outline-none focus:shadow-outline">Submit</button>
     </form>
 
     <app-footer></app-footer>
-
   </div>
+
 
 
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
@@ -24,13 +24,6 @@
       <h3 class="text-lg font-bold">CPU</h3>
       <p>{{ buildInfo.CPU.value }}</p>
       <p>£{{ buildInfo.CPU.price }}</p>
-
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the CPU</option>-->
-<!--        <option *ngFor="let cpu of cpuArray" [value]="cpu.partName">-->
-<!--          {{ cpu.partName }} - £{{ cpu.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
 
       <select [(ngModel)]="selectedParts['CPU']" (ngModelChange)="updatePart('CPU')">
         <option value="" disabled selected>Click here to edit the CPU</option>
@@ -46,13 +39,6 @@
       <p>{{ buildInfo.Case.value }}</p>
       <p>£{{ buildInfo.Case.price }}</p>
 
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the Case</option>-->
-<!--        <option *ngFor="let myCase of caseArray" [value]="myCase.partName">-->
-<!--          {{ myCase.partName }} - £{{ myCase.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
-
       <select [(ngModel)]="selectedParts['Case']" (ngModelChange)="updatePart('Case')">
         <option value="" disabled selected>Click here to edit the Case</option>
         <option *ngFor="let myCase of caseArray" [ngValue]="{ partName: myCase.partName, partPrice: myCase.partPrice }">
@@ -67,13 +53,6 @@
       <p>{{ buildInfo.GPU.value }}</p>
       <p>£{{ buildInfo.GPU.price }}</p>
 
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the GPU</option>-->
-<!--        <option *ngFor="let gpu of gpuArray" [value]="gpu.partName">-->
-<!--          {{ gpu.partName }} - £{{ gpu.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
-
       <select [(ngModel)]="selectedParts['GPU']" (ngModelChange)="updatePart('GPU')">
         <option value="" disabled selected>Click here to edit the GPU</option>
         <option *ngFor="let gpu of gpuArray" [ngValue]="{ partName: gpu.partName, partPrice: gpu.partPrice }">
@@ -86,13 +65,6 @@
       <h3 class="text-lg font-bold">Motherboard</h3>
       <p>{{ buildInfo.Motherboard.value }}</p>
       <p>£{{ buildInfo.Motherboard.price }}</p>
-
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the Motherboard</option>-->
-<!--        <option *ngFor="let motherboard of motherboardArray" [value]="motherboard.partName">-->
-<!--          {{ motherboard.partName }} - £{{ motherboard.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
 
       <select [(ngModel)]="selectedParts['Motherboard']" (ngModelChange)="updatePart('Motherboard')">
         <option value="" disabled selected>Click here to edit the Motherboard</option>
@@ -122,13 +94,6 @@
       <p>{{ buildInfo.RAM.value }}</p>
       <p>£{{ buildInfo.RAM.price }}</p>
 
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the Ram</option>-->
-<!--        <option *ngFor="let ram of ramArray" [value]="ram.partName">-->
-<!--          {{ ram.partName }} - £{{ ram.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
-
       <select [(ngModel)]="selectedParts['RAM']" (ngModelChange)="updatePart('RAM')">
         <option value="" disabled selected>Click here to edit the Ram</option>
         <option *ngFor="let ram of ramArray" [ngValue]="{ partName: ram.partName, partPrice: ram.partPrice }">
@@ -142,13 +107,6 @@
       <h3 class="text-lg font-bold">Storage</h3>
       <p>{{ buildInfo.Storage.value }}</p>
       <p>£{{ buildInfo.Storage.price }}</p>
-
-<!--      <select>-->
-<!--        <option value="" disabled selected>Click here to edit the Storage</option>-->
-<!--        <option *ngFor="let storage of storageArray" [value]="storage.partName">-->
-<!--          {{ storage.partName }} - £{{ storage.partPrice }}-->
-<!--        </option>-->
-<!--      </select>-->
 
       <select [(ngModel)]="selectedParts['Storage']" (ngModelChange)="updatePart('Storage')">
         <option value="" disabled selected>Click here to edit the Storage</option>
