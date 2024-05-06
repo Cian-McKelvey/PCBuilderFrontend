@@ -1,8 +1,8 @@
 <div *ngIf="userService.getIsUserLoggedIn()">
 
-  <app-navbar></app-navbar>
-
   <div *ngIf="!isBuildCreated">
+
+    <app-navbar></app-navbar>
 
     <div class="flex flex-col items-center justify-center min-h-screen">
       <form [formGroup]="priceForm" (ngSubmit)="submitPrice()" class="max-w-md mx-auto bg-white rounded-lg shadow-xl p-6 mt-[-20%] w-[60vw]">
@@ -16,8 +16,6 @@
 
     <app-footer></app-footer>
   </div>
-
-
 
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
 
@@ -147,10 +145,15 @@
 
 </div>
 
+
 <div *ngIf="!userService.getIsUserLoggedIn()">
+  <app-navbar></app-navbar>
 
-  <h1>Same but not logged in</h1>
-
-  <app-footer></app-footer>
+  <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="p-6 rounded-lg bg-gray-200 text-center mt-[-20%]">
+      <h1 class="text-xl font-bold mb-4 text-red-600">You are not logged in</h1>
+      <p class="text-red-600">You must be logged in to view the pages contents.</p>
+    </div>
+  </div>
 
 </div>
