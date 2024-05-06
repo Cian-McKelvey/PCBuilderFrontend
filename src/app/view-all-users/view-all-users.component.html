@@ -1,40 +1,54 @@
-<div *ngIf="userService.getIsUserLoggedIn() && userService.getIsUserAdmin()">
+<app-navbar></app-navbar>
 
-  <div class="return_buttons">
-    <button (click)="returnHome()">Go back to Homepage</button>
-    <br>
-    <button (click)="returnToAdmin()">Go Back to Admin Page</button>
+<div *ngIf="userService.getIsUserLoggedIn() && userService.getIsUserAdmin()" class="flex flex-col items-center justify-center min-h-screen">
+  <div class="mb-8">
+    <div class="flex space-x-4">
+      <button (click)="returnHome()" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">Go back to Homepage</button>
+      <button (click)="returnToAdmin()" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">Go Back to Admin Page</button>
+    </div>
   </div>
 
-  <div>
-
+  <div class="w-full max-w-3xl">
     <!-- Show the users once a response has been received -->
     <div *ngIf="areUsersFetched && userAccounts.length > 0">
-      <div class="p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let user of userAccounts | paginate: { itemsPerPage: 10, currentPage: pageNum }">
-
-        <div>
-          <h3 class="text-lg font-bold">{{ user.username }}</h3>
-          <p>{{ user.registration_date }}</p>
-          <p>{{ user.user_id }}</p>
-          <button (click)="adminDeleteUser(user.user_id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete This User</button>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-6 rounded-lg bg-gray-200" *ngFor="let user of userAccounts | paginate: { itemsPerPage: 10, currentPage: pageNum }">
+          <h3 class="text-lg font-bold mb-2">{{ user.username }}</h3>
+          <p class="mb-2">{{ user.registration_date }}</p>
+          <p class="mb-4">{{ user.user_id }}</p>
+          <button (click)="adminDeleteUser(user.user_id)" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-red-400">Delete This User</button>
         </div>
-
       </div>
 
       <!-- Pagination controls reference "pageNum" from the TypeScript file -->
-      <pagination-controls class="pagination-controls" (pageChange)="pageNum = $event"></pagination-controls>
-
+      <div class="mt-6 flex justify-center">
+        <pagination-controls class="pagination-controls" (pageChange)="pageNum = $event"></pagination-controls>
+      </div>
     </div>
 
-    <div *ngIf="areUsersFetched && userAccounts.length === 0">
-      <h1>There are no users of the site currently</h1>
+    <div *ngIf="areUsersFetched && userAccounts.length === 0" class="p-6 rounded-lg bg-gray-200">
+      <h1 class="text-lg font-bold">There are no users of the site currently</h1>
     </div>
 
     <!-- Show a loading message while users are being fetched -->
-    <div *ngIf="!areUsersFetched">
-      <p>Loading users...</p>
+    <div *ngIf="!areUsersFetched" class="p-6 rounded-lg bg-gray-200">
+      <p class="text-gray-800">Loading users...</p>
     </div>
-
   </div>
-
 </div>
+
+<div *ngIf="userService.getIsUserLoggedIn() && !userService.getIsUserAdmin()" class="flex flex-col items-center justify-center min-h-screen">
+  <div class="p-6 rounded-lg bg-gray-200 text-center mt-[-20%]">
+    <h1 class="text-xl font-bold mb-4 text-red-600">Access Denied</h1>
+    <p class="text-red-600">You do not have permission to view this page. Only administrators can access the list of all users.</p>
+  </div>
+</div>
+
+<div *ngIf="!userService.getIsUserLoggedIn()" class="flex flex-col items-center justify-center min-h-screen">
+  <div class="p-6 rounded-lg bg-gray-200">
+    <h1 class="text-xl font-bold mb-4">Please Log In</h1>
+    <p class="text-gray-800">You need to be logged in to access this page. Please log in or create an account to continue.</p>
+  </div>
+</div>
+
+<app-footer></app-footer>
