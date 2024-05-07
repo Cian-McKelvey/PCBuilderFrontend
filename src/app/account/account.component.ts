@@ -30,19 +30,21 @@ export class AccountComponent {
     this.updatePasswordForm = this.formBuilder.group({
       username: ['', Validators.required],
       oldPassword: ['', Validators.required],
-      newPassword: ['', [Validators.required, Validators.minLength(6)]] // Required length of 6
+      // Required length of 6 for the new password
+      newPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
   logout() {
     const currentToken = this.userService.getCurrentUserToken();
 
+    // Checks the token is present then calls logout endpoint
     if (currentToken) {
       this.webService.callLogout(currentToken).subscribe(
         (response) => {
-          // Handle successful logout
           console.log('Logout successful:', response);
 
+          // Clears all the userService properties, both for the service itself and in local storage
           this.userService.setIsUserLoggedIn(false);
           this.userService.setIsUserAdmin(false);
           this.userService.setCurrentUserId('');
@@ -55,13 +57,14 @@ export class AccountComponent {
           window.alert('You have been logged out');
         },
         (error) => {
-          // Handle logout error
+          // Displays a failed logout message
           console.error('Logout error:', error);
-          window.alert('Logout Failed');
+          window.alert('Logout Failed: Please try again');
         }
       );
     }
     else {
+      // Explains there was no token present
       console.error("LOGOUT ERROR, no valid token present");
       window.alert("LOGOUT ERROR, no valid token present");
     }
@@ -71,6 +74,8 @@ export class AccountComponent {
     Methods below here are involved with the form validation, toggling of the form or submitting the form
     for the delete account functionality.
   */
+
+  // Shows or hides the delete account form
   toggleDeleteAccountForm(): void {
     if (this.showUpdatePasswordForm) {
       this.toggleUpdatePasswordForm();
@@ -87,14 +92,15 @@ export class AccountComponent {
     return messageControl.invalid || messageControl.pristine || (messageControl.valid && !messageControl.touched);
   }
 
+  // Called on delete account button press to facilitate account deletion
   deleteAccountSubmit(): void {
     const id = this.userService.getCurrentUserId();
     const token = this.userService.getCurrentUserToken();
 
+    // Checks the status of id and token to see if the delete account endpoint can be called.
     if (id && token) {
       this.webService.callDeleteAccountEndpoint(id, token).subscribe(
         (response) => {
-          // Handle successful logout
           console.log('Deletion successful:', response);
           window.alert('Account Deleted.');
 
@@ -102,14 +108,18 @@ export class AccountComponent {
           this.logout();
         },
         (error) => {
-          // Handle logout error
+          // Notify user of a fail
           console.error('Deletion error:', error);
-          window.alert('Deletion Failed');
+          window.alert('Deletion Failed: Please try again.');
         }
       );
+    } else {
+      console.error('Deletion error: Verify valid token or ID');
+      window.alert('Deletion Failed: Verify Login Status');
     }
   }
 
+  // Shows or hides the delete account form
   toggleUpdatePasswordForm(): void {
     if (this.showDeleteAccountForm) {
       this.toggleDeleteAccountForm();
@@ -123,10 +133,10 @@ export class AccountComponent {
     const newPassword = this.updatePasswordForm.value.newPassword;
     const token = this.userService.getCurrentUserToken();
 
+    // Checks for a present token
     if (token) {
       this.webService.callUpdateUserPasswordEndpoint(username, oldPassword, newPassword, token).subscribe(
         (response) => {
-          // Handle successful logout
           console.log('Password updated:', response);
           window.alert('Password Updated.');
 
@@ -134,11 +144,13 @@ export class AccountComponent {
           this.logout();
         },
         (error) => {
-          // Handle logout error
           console.error('Password could not be updated:', error);
           window.alert('Password change failed, check current password and try again.');
         }
       );
+    } else {
+      console.error('Deletion error: Verify valid token');
+      window.alert('Deletion Failed: Verify Login Status');
     }
 
   }

@@ -1,3 +1,4 @@
+/*Styling used to change the colour of the pagination controls*/
 .pagination-controls ::ng-deep .ngx-pagination .current {
   margin-top: 20px;
   background: #ffc107;

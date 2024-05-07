@@ -1,5 +1,6 @@
 <div *ngIf="userService.getIsUserLoggedIn()">
 
+  <!--Checks if a build has been generated, if it hasnt display the form to create a build-->
   <div *ngIf="!isBuildCreated">
 
     <app-navbar></app-navbar>
@@ -17,6 +18,7 @@
     <app-footer></app-footer>
   </div>
 
+  <!--If a build has been created, display each part-->
   <div *ngIf="isBuildCreated && buildInfo" class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6">
 
     <h2 class="text-2xl font-bold col-span-2 mb-4">Your new build!</h2>
@@ -26,6 +28,7 @@
       <p>{{ buildInfo.CPU.value }}</p>
       <p>£{{ buildInfo.CPU.price }}</p>
 
+      <!--These fields allow the editing of the part by showing the complete list of parts for that type-->
       <select [(ngModel)]="selectedParts['CPU']" (ngModelChange)="updatePart('CPU')">
         <option value="" disabled selected>Click here to edit the CPU</option>
         <option *ngFor="let cpu of cpuArray" [ngValue]="{ partName: cpu.partName, partPrice: cpu.partPrice }">
@@ -134,6 +137,7 @@
       Create Another Build
     </button>
 
+    <!--Checks if a part has been edited and allows it to be saved if so-->
     <div *ngIf="editedPartsCount > 0">
       <button class="mt-4 bg-[#333] hover:bg-[#333]-700 text-yellow-500 hover:text-yellow-300 font-bold py-2 px-4 rounded"
               (click)="submitBuildReplacement()">
@@ -145,7 +149,7 @@
 
 </div>
 
-
+<!--Generic message showing the user isn't logged in-->
 <div *ngIf="!userService.getIsUserLoggedIn()">
   <app-navbar></app-navbar>
 

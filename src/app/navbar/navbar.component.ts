@@ -10,6 +10,7 @@ export class NavbarComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
+  // Checks if the current URL matches a given route
   isActiveRoute(route: string): boolean {
     return this.router.url === route;
   }

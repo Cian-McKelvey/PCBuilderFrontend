@@ -1,6 +1,7 @@
 <div class="bg-[#333] shadow-lg min-h-screen flex flex-col justify-center items-center">
   <h1 class="text-3xl text-white font-bold mb-8">Create Account</h1>
 
+  <!--Form for creating an account-->
   <form [formGroup]="createAccountForm" (ngSubmit)="onCreateAccountSubmit()" class="max-w-md mx-auto mt-8 shadow-lg bg-white rounded-lg p-8 text-gray-900">
     <div class="mb-4">
       <label for="create-username" class="block text-gray-700 text-sm font-bold mb-2">Username</label>
@@ -14,6 +15,7 @@
       <div *ngIf="isInvalidSignup('password')" class="text-red-500 text-xs mt-1">Invalid password</div>
     </div>
 
+    <!--Consent information-->
     <div class="mb-4 text-sm text-gray-600">
       <p>By creating an account, you agree to allow us to collect and process your personal data, including your username and password, for the purpose of maintaining your account and providing you with our services.</p>
       <div class="mt-2 flex items-center">

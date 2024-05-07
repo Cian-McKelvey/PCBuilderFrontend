@@ -1,12 +1,15 @@
 <app-navbar></app-navbar>
 
 <div class="flex justify-center items-center mt-100%">
+
+  <!--Displaying content only if user is an admin-->
   <div *ngIf="userService.getIsUserAdmin() && userService.getIsUserLoggedIn()" class="bg-gray-200 p-6 rounded-lg mb-6">
     <h1 class="text-xl font-bold mb-4 text-gray-800">ADMIN RIGHTS DETECTED!</h1>
     <hr class="mb-4">
 
+    <!--Displaying admin info once loaded-->
     <div *ngIf="isAppInfoLoaded">
-      <h3 class="font-semibold">Admin info is:</h3>
+      <h3 class="font-semibold">Admin info</h3>
       <p class="mb-4 text-gray-700">
         Current Site User Count: {{ appInfo.num_users }} <br>
         There are {{ appInfo.num_builds }} pc builds stored currently! <br>
@@ -22,17 +25,20 @@
         </span>
       </div>
 
+      <!--Buttons used to navigate further into admin controls or back to the homepage-->
       <button (click)="viewAllUsersPage()" class="bg-yellow-500 hover:bg-yellow-700 text-gray-800 font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">View all site users</button>
       <button (click)="returnHome()" class="bg-yellow-500 hover:bg-blue-700 text-gray-800 font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">Go back to Homepage</button>
 
     </div>
 
+    <!--Filler message to show when application is loading-->
     <div *ngIf="!isAppInfoLoaded" class="mb-4">
       <h1 class="font-semibold">App Admin information is loading...</h1>
     </div>
 
   </div>
 
+  <!--Message showing the user doesn't have admin status-->
   <div *ngIf="userService.getIsUserLoggedIn() && !userService.getIsUserAdmin()" class="flex flex-col items-center justify-center min-h-screen">
     <div class="p-6 rounded-lg bg-gray-200 text-center mt-[-20%]">
       <h1 class="text-xl font-bold mb-4 text-red-600">Access Denied</h1>
@@ -40,6 +46,7 @@
     </div>
   </div>
 
+  <!--Default message showing the user they are not logged in-->
   <div *ngIf="!userService.getIsUserLoggedIn()">
     <div class="flex flex-col items-center justify-center min-h-screen">
       <div class="p-6 rounded-lg bg-gray-200 text-center mt-[-20%]">

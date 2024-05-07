@@ -19,7 +19,7 @@ export class HomeComponent {
   loginForm: any;
 
   ngOnInit() {
-    // Login Form
+    // Login Form validators, ensure both fields are entered
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -46,32 +46,19 @@ export class HomeComponent {
           this.userService.setIsUserLoggedIn(true);
           this.userService.setIsUserAdmin(adminStatus);
 
-          // this.webService.callCSRFTokenEndpoint().subscribe(
-          //   (data: any): void => {
-          //     const csrfToken = data.csrf_token;
-          //     console.log('CSRF Token generated');
-          //     console.log(csrfToken);
-          //     this.userService.setCurrentUserCSRFToken(csrfToken);
-          //   },
-          //   (error: any) => {
-          //     console.error('Error occurred while fetching CSRF token:', error);
-          //   }
-          // );
-
           console.log("Login Successful")
           window.alert("Login Successful");
 
-          // Once logged in, set the parts list to local storage
+          // Once logged in, the complete list of PC Parts can be fetched
           const currentToken = this.userService.getCurrentUserToken();
-
           if (currentToken) {
             this.webService.callFetchAllPartsEndpoint(currentToken)
               .toPromise()
               .then((response: any) => {
-                const completePartsArray = response.parts;
-
-                // After saving all this data to local storage the complete data stored is around 70kb.
+                // Fetch the parts list from the response, add a small bit of preprocessing and save to local storage
+                // After saving all this data to local storage the complete data stored is around 150kb.
                 // This is considered acceptable
+                const completePartsArray = response.parts;
                 this.storageService.saveToLocalStorage('PartsArray', completePartsArray);
                 console.log('Parts loaded to local storage!');
               })
@@ -92,10 +79,12 @@ export class HomeComponent {
 
   }
 
+  // Keeps an eye on the form to detect wrong inputs etc...
   isInvalidLogin(control: any): boolean {
     return this.loginForm.controls[control].invalid && this.loginForm.controls[control].touched;
   }
 
+  // Allows the user to navigate to the admin page if admin status is present
   goToAdminPage(){
     this.router.navigate(['/admin']);
   }

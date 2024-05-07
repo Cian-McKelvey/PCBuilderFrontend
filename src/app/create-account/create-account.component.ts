@@ -15,13 +15,17 @@ export class CreateAccountComponent {
   constructor(private formBuilder: FormBuilder, private webService: WebService, private router: Router) { }
 
   ngOnInit(): void {
+    // Form builder and validators
     this.createAccountForm = this.formBuilder.group({
+      // All items required, password must be at least six chars
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      // Requires that permission is given
       consent: ['', Validators.requiredTrue]
     });
   }
 
+  // Called on form submission
   onCreateAccountSubmit(): void {
     // Check if the form is valid
     if (this.createAccountForm.valid && this.createAccountForm.get('consent').value) {
@@ -32,14 +36,13 @@ export class CreateAccountComponent {
       const username = this.createAccountForm.get('username').value;
       const password = this.createAccountForm.get('password').value;
 
-      // You can now send the form data to your backend API for signup process
-      // Needs to remove firstname and lastname args in the method call
+      // Send the form data to the API
       this.webService.callCreateAccountEndpoint(username, password).subscribe(
         (response: any) => {
-          console.log('Full response:', response);
+          console.log('Account creation success:', response);
           window.alert('Account creation successful');
 
-          // Return to root page here
+          // Return to the homepage
           this.router.navigate(['/']);
 
         },

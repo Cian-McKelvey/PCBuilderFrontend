@@ -12,7 +12,7 @@ export class ViewAllUsersComponent {
 
   userAccounts: any;  // Holds the users that are fetched
   pageNum: number = 1;  // Pagination control variable
-  areUsersFetched: boolean = false;
+  areUsersFetched: boolean = false;  // Variable holding whether or not the users are fetched
 
   constructor(public webService: WebService,
               public userService: UserService,
@@ -21,12 +21,13 @@ export class ViewAllUsersComponent {
   ngOnInit() {
     const adminStatus = this.userService.getIsUserAdmin();
     const currentToken = this.userService.getCurrentUserToken();
-    // Checks for admin status and loads data if so
+    // Checks for admin status and if present the data is loaded
     if (adminStatus && currentToken) {
       this.webService.callFetchAllUsersEndpoint(currentToken)
         .subscribe(
           (data: any) => {
             console.log('All users have been fetched', data);
+            // Sets a variable to hold all the app users in an array/list
             this.userAccounts = data.users;
             console.log("user accounts fetched");
             this.areUsersFetched = true;
@@ -41,14 +42,17 @@ export class ViewAllUsersComponent {
     }
   }
 
+  // Route to return home
   returnHome(): void {
     this.router.navigate(['/']);
   }
 
+  // Route to return to the admin main page
   returnToAdmin(): void {
     this.router.navigate(['/admin']);
   }
 
+  // Allows you to delete a user as an admin
   adminDeleteUser(userID: string): void {
     const token = this.userService.getCurrentUserToken();
     if (token) {

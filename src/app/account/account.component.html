@@ -11,6 +11,7 @@
         </div>
       </div>
 
+      <!--Buttons used to display the appropriate form when clicked-->
       <div class="px-6 py-4">
         <button (click)="toggleDeleteAccountForm()" class="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline mb-4">Delete Account</button>
         <button (click)="toggleUpdatePasswordForm()" class="w-full bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out focus:outline-none focus:shadow-outline">Update Password</button>
@@ -46,6 +47,7 @@
 
 </div>
 
+<!--Default message showing the user they are not logged in-->
 <div *ngIf="!userService.getIsUserLoggedIn()" class="flex flex-col items-center justify-center min-h-screen">
   <div class="p-6 rounded-lg bg-gray-200 text-center mt-[-20%]">
     <h1 class="text-xl font-bold mb-4 text-red-600">You are not logged in</h1>

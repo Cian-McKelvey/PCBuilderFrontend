@@ -5,8 +5,10 @@
 
   <div>
 
-    <!-- Show the build section only if buildsByAccount is not empty -->
+    <!--Show the builds section only if the request to fetch builds has completed, and the user
+     has created a build that is still stored and hasn't been deleted etc...-->
     <div *ngIf="areBuildsFetched && buildsByAccount.length > 0">
+      <!--Loop through their builds displaying them, only shows one per page for easy understanding-->
       <div class="bg-gray-100 p-6 rounded-lg grid grid-cols-2 gap-6" *ngFor="let buildInfo of buildsByAccount | paginate: { itemsPerPage: 1, currentPage: pageNum }">
 
         <div>
@@ -62,6 +64,7 @@
           <p>{{ buildInfo.created_at }}</p>
         </div>
 
+        <!--Button that allows the build to be deleted. Uses the id of the current build-->
         <div class="col-span-2">
           <button (click)="deleteBuild(buildInfo.build_id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete This Build</button>
         </div>
@@ -73,6 +76,7 @@
 
     </div>
 
+    <!--Message that shows the user they have no builds created-->
     <div *ngIf="areBuildsFetched && buildsByAccount.length === 0" class="p-4 bg-gray-100 border border-gray-300 rounded-md">
       <h1 class="text-xl font-bold text-gray-800">No builds have been created on this account - Create a build to get started!</h1>
     </div>

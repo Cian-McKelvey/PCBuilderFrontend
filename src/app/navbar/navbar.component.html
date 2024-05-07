@@ -1,10 +1,12 @@
 <nav class="bg-[#333] shadow-lg">
   <div class="container mx-auto px-4">
     <div class="flex items-center justify-between h-16">
+
       <div class="flex">
         <div class="flex-shrink-0">
           <a routerLink="/" class="text-white" [class.active]="isActiveRoute('/')">Home</a>
         </div>
+        <!--Navigation links for New Build and All Builds-->
         <div class="hidden md:block">
           <ul class="ml-10 flex items-baseline space-x-4">
             <li>
@@ -17,17 +19,10 @@
         </div>
       </div>
 
-<!--      <div class="hidden md:block">-->
-<!--        <div class="ml-4 flex items-center md:ml-6">-->
-<!--          <div class="form-inline">-->
-<!--            <a routerLink="/account" class="text-yellow-500 hover:text-yellow-300" [class.active]="isActiveRoute('/account')">Account</a>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-
       <div class="hidden md:block">
         <div class="ml-4 flex items-center md:ml-6">
           <div class="form-inline">
+            <!--Uses an account icon to link to the accounts page-->
             <a routerLink="/account" [class.active]="isActiveRoute('/account')">
               <img [src]="'assets/user_symbol.svg'" alt="User Symbol" class="h-10 w-10" />
             </a>
