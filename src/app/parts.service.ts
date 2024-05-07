@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Service for managing and manipulating lists of computer parts.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -14,6 +17,11 @@ export class PartsService {
   motherboardList: any[] = [];
   psuList: any[] = [];
   caseList: any[] = [];
+
+  /**
+   * Getters and setters for accessing and modifying the part lists.
+   * Each part list has a corresponding getter and setter method.
+   */
 
   getCpuList(): any[] {
     return this.cpuList;
@@ -71,10 +79,10 @@ export class PartsService {
     this.caseList = value;
   }
 
-  // Make sure this is correct, primarily the strings being checked to add parts to the correct list
-  // Also the complete parts list can probably be stored in local storage in the browser. Will increase computation time
-  // Finally make sure that either on method call, or change the method to make sure it works with the fact
-  // that its held in a nested 'parts' json object
+  /**
+   * Separates a complete list of parts into individual lists based on the part type.
+   * @param completePartList - An array containing all parts, with each part represented as an array [type, name, price].
+   */
   setAllSeparatePartLists(completePartList: any[]): void {
     const cpuList: any[] = [];
     const gpuList: any[] = [];
@@ -89,9 +97,9 @@ export class PartsService {
       const currentPart = completePartList[i];
 
       /*
-      Below adds some overhead now but aims to reduce complexity later. Will be tested to see if it keeps up
-      The object split using array destructuring to remove the CPU field etc... this leaves the part lists clean
-      i.e. Instead of the lists being cpus = [{CPU, Intel i5, 200}, {CPU, AMD Ryzen, 250}]
+      This adds some overhead now but aims to reduce complexity later. Will be continually tested to see if it keeps up.
+      The objects are split using array destructuring to remove the Type field etc... this leaves the part lists clean
+      i.e. Instead of the lists being : cpus = [{CPU, Intel i5, 200}, {CPU, AMD Ryzen, 250}]
       They will now be cpus = [{Intel i5, 200}, {AMD Ryzen, 250}]
       */
 
@@ -104,14 +112,12 @@ export class PartsService {
       } else if (currentPart[0] === "RAM") {
         const [, partName, partPrice] = currentPart;
         ramList.push({ partName, partPrice });
-        // Issue Here
       } else if (currentPart[0] === "HDD" || currentPart[0] === "SSD") {
         const [, partName, partPrice] = currentPart;
         storageList.push({ partName, partPrice });
       } else if (currentPart[0] === "Motherboard") {
         const [, partName, partPrice] = currentPart;
         motherboardList.push({ partName, partPrice });
-        // Issue Here
       } else if (currentPart[0] === "Power Supply") {
         const [, partName, partPrice] = currentPart;
         psuList.push({ partName, partPrice });

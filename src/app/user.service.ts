@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {StorageService} from "./storage.service";
 
+
+/**
+ * Service for managing the current user's data and authentication status.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +17,10 @@ export class UserService {
   isUserAdmin: boolean;
   userCSRFToken: string;
 
-  /*
-  Variables are initialised in the constructor. Could just initialise them by setting values in
-  the class scope, but I feel this adds some readability.
-  */
+  /**
+   * Constructor that injects the StorageService.
+   * @param storageService - The StorageService instance.
+   */
   constructor(public storageService: StorageService) {
     this.currentUserId = '';
     this.currentUserUsername = '';
@@ -25,6 +29,11 @@ export class UserService {
     this.isUserLoggedIn = false;
     this.isUserAdmin = false;
   }
+
+  /**
+   * Getters and setters for accessing and modifying the user's data.
+   * Each property has a corresponding getter and setter method that also handles storing the data in local storage.
+   */
 
   setCurrentUserCSRFToken(csrfToken: string): void {
     this.userCSRFToken = csrfToken;
@@ -40,7 +49,6 @@ export class UserService {
     }
   }
 
-  // Collection of getters and setters for using the data
   setCurrentUserId(id: string): void {
     this.currentUserId = id;
     this.storageService.saveToLocalStorage("ID", id)

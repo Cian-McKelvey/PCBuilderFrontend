@@ -16,6 +16,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import { AdminComponent } from './admin/admin.component';
 import { ViewAllUsersComponent } from './view-all-users/view-all-users.component';
 
+// Routes used by the app router to navigate throughout the site
 const routes: any = [
   {
     path: '',
@@ -63,10 +64,10 @@ const routes: any = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes),  // Router module using the routes
     ReactiveFormsModule,
     FormsModule,
-    NgxPaginationModule,
+    NgxPaginationModule,  // pagination module
   ],
   providers: [],
   bootstrap: [AppComponent]
